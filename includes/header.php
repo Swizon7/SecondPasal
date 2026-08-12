@@ -1,144 +1,189 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+
+if(session_status() == PHP_SESSION_NONE)
+{
     session_start();
 }
+
 $current = basename($_SERVER['PHP_SELF']);
-?>
-
-<?php
-
-if(isset($_GET['logout']))
-{
-    echo '
-    <div class="success-message">
-        ✅ Logged out successfully.
-    </div>';
-}
 
 ?>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="/SecondPasal/assets/css/header.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
 
 <header>
 
-    <!-- Top Header -->
-    <div class="top-header">
+<div class="header-container">
 
-        <div class="logo">
-            <a href="/SecondPasal/homepage/homepage.php">
-                <i class="fa-solid fa-store"></i>
-                Second<span>Pasal</span>
-            </a>
-        </div>
+    <!-- Logo -->
 
-        <div class="header-right">
+    <a href="/SecondPasal/homepage/homepage.php" class="logo">
 
-            <?php if(isset($_SESSION['user_id'])) { ?>
+        <i class="fa-solid fa-store"></i>
 
-                <a href="/SecondPasal/products/sell_item.php" class="sell-btn">
-                    <i class="fa-solid fa-plus"></i>
-                    Sell Item
-                </a>
+        Second<span>Pasal</span>
 
-                <div class="dropdown">
-
-                    <button class="drop-btn">
-
-                        <i class="fa-solid fa-circle-user"></i>
-
-                        <?php echo htmlspecialchars($_SESSION['name']); ?>
-
-                        <i class="fa-solid fa-chevron-down"></i>
-
-                    </button>
-
-                    <div class="dropdown-menu">
-
-                        <a href="/SecondPasal/profile/profile.php">
-                            <i class="fa-solid fa-user"></i>
-                            My Profile
-                        </a>
-
-                        <a href="/SecondPasal/products/my_listings.php">
-                            <i class="fa-solid fa-box"></i>
-                            My Listings
-                        </a>
-
-                        <a href="/SecondPasal/dashboard/dashboard.php">
-                            <i class="fa-solid fa-chart-line"></i>
-                            Dashboard
-                        </a>
-
-                        <a href="/SecondPasal/chat/chat.php">
-                            <i class="fa-solid fa-comments"></i>
-                            Messages
-                        </a>
-
-                        <hr>
-
-                        <a href="/SecondPasal/login/logout.php">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Logout
-                        </a>
-
-                    </div>
-
-                </div>
-
-            <?php } else { ?>
-
-                <button id="loginBtn" class="login-btn">Login</button>
-
-                <button id="registerBtn" class="register-btn">Register</button>
-
-            <?php } ?>
-
-        </div>
-
-    </div>
+    </a>
 
     <!-- Navigation -->
 
-    <div class="nav-container">
+    <nav>
 
-        <nav>
+        <a class="<?=($current=="homepage.php")?"active":"";?>"
+        href="/SecondPasal/homepage/homepage.php">
 
-            <a href="/SecondPasal/homepage/homepage.php"
-               class="<?= $current=='homepage.php' ? 'active' : '' ?>">
-               Home
-            </a>
+            Home
 
-            <a href="/SecondPasal/products/products.php"
-               class="<?= $current=='products.php' ? 'active' : '' ?>">
-               Products
-            </a>
+        </a>
 
-            <a href="#">
-                Categories
-            </a>
+        <a class="<?=($current=="products.php")?"active":"";?>"
+        href="/SecondPasal/products/products.php">
 
-            <a href="#">
-                Contact
-            </a>
+            Products
 
-        </nav>
+        </a>
 
-        <form action="/SecondPasal/products/products.php" method="GET" class="search-box">
+        <a href="#">
 
-            <input
-                type="text"
-                name="search"
-                placeholder="Search products...">
+            About
 
-            <button type="submit">
+        </a>
 
-                <i class="fa-solid fa-magnifying-glass"></i>
+        <a href="#">
+
+            Contact
+
+        </a>
+
+    </nav>
+
+    <!-- Search -->
+
+    <form action="/SecondPasal/products/products.php" method="GET" class="search-box">
+
+        <input
+        type="text"
+        name="search"
+        placeholder="Search products...">
+
+        <button>
+
+            <i class="fa fa-search"></i>
+
+        </button>
+
+    </form>
+
+    <!-- Right -->
+
+    <div class="right-side">
+
+<?php
+
+if(isset($_SESSION['user_id']))
+{
+
+?>
+
+        <a href="/SecondPasal/products/upload_product.php"
+        class="sell-btn">
+
+            <i class="fa fa-plus"></i>
+
+            Sell Item
+
+        </a>
+
+        <div class="dropdown">
+
+            <button class="dropbtn">
+
+                <i class="fa fa-user-circle"></i>
+
+                <?=htmlspecialchars($_SESSION['name'])?>
+
+                <i class="fa fa-angle-down"></i>
 
             </button>
 
-        </form>
+            <div class="dropdown-content">
+
+                <a href="/SecondPasal/dashboard/dashboard.php">
+
+                    Dashboard
+
+                </a>
+
+                <a href="/SecondPasal/products/my_listings.php">
+
+                    My Listings
+
+                </a>
+
+                <a href="/SecondPasal/profile/profile.php">
+
+                    Profile
+
+                </a>
+
+                <a href="/SecondPasal/login/logout.php">
+
+                    Logout
+
+                </a>
+
+            </div>
+
+        </div>
+
+<?php
+
+}
+
+else
+
+{
+
+?>
+
+        <a href="/SecondPasal/login/login.php"
+        class="login-btn">
+
+            Login
+
+        </a>
+
+        <a href="/SecondPasal/login/register.php"
+        class="register-btn">
+
+            Register
+
+        </a>
+
+<?php
+
+}
+
+?>
 
     </div>
+
+</div>
 
 </header>

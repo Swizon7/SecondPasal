@@ -1,6 +1,34 @@
 <?php
 session_start();
+include("../db.php");
 include("../includes/header.php");
+// Total Users
+$userQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users");
+$userData = mysqli_fetch_assoc($userQuery);
+
+// Total Products
+$productQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM products");
+$productData = mysqli_fetch_assoc($productQuery);
+
+// Total Categories
+$categoryQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM categories");
+$categoryData = mysqli_fetch_assoc($categoryQuery);
+
+// Get all categories
+$categoryResult = mysqli_query($conn, "SELECT * FROM categories ORDER BY category_name ASC");
+
+// Latest 8 Products
+$productResult = mysqli_query($conn,"
+SELECT
+    products.*,
+    users.name
+FROM products
+INNER JOIN users
+ON products.user_id = users.id
+WHERE status='available'
+ORDER BY created_at DESC
+LIMIT 8
+");
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +40,9 @@ include("../includes/header.php");
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <link rel="stylesheet" href="/SecondPasal/assets/css/header.css">
+<link rel="stylesheet" href="/SecondPasal/assets/css/homepage.css">
 
-<link rel="stylesheet" href="homepage.css">
+<!-- <link rel="stylesheet" href="homepage.css"> -->
 </head>
 
 <body>
@@ -27,13 +56,13 @@ include("../includes/header.php");
             ♻ Sustainable Marketplace
         </span>
 
-        <h1>
+       <h1>
             Buy & Sell <span>Second-Hand</span> Products
         </h1>
 
         <p>
-            Discover amazing deals on quality pre-owned items or sell products
-            you no longer use. Fast, secure and affordable.
+            Discover quality pre-owned items across Nepal.
+            Save money, reduce waste, and give products a second life with SecondPasal.
         </p>
 
         <div class="hero-buttons">
@@ -44,15 +73,15 @@ include("../includes/header.php");
 
             <?php if(isset($_SESSION['user_id'])) { ?>
 
-                <a href="../products/sell_item.php" class="sell-now-btn">
+                <a href="../products/upload_product.php" class="sell-btn">
                     Sell Item
                 </a>
 
             <?php } else { ?>
 
-                <button id="heroLoginBtn" class="sell-now-btn">
-                    Sell Item
-                </button>
+                <a href="../login/register.php" class="sell-btn">
+                    Get Started
+                </a>
 
             <?php } ?>
 
@@ -62,12 +91,11 @@ include("../includes/header.php");
 
     <div class="hero-right">
 
-        <img src="../assets/images/hero.png" alt="Marketplace">
+        <img src="../assets/images/logo.png" alt="SecondPasal">
 
     </div>
 
 </section>
-
 <!-- Statistics Section -->
  <!-- ================= STATISTICS ================= -->
 
@@ -75,9 +103,19 @@ include("../includes/header.php");
 
     <div class="stat-card">
 
-        <i class="fa-solid fa-box-open"></i>
+        <i class="fa-solid fa-users"></i>
 
-        <h2>500+</h2>
+        <h2><?php echo $userData['total']; ?></h2>
+
+        <p>Registered Users</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <i class="fa-solid fa-box"></i>
+
+        <h2><?php echo $productData['total']; ?></h2>
 
         <p>Products Listed</p>
 
@@ -85,31 +123,11 @@ include("../includes/header.php");
 
     <div class="stat-card">
 
-        <i class="fa-solid fa-users"></i>
+        <i class="fa-solid fa-list"></i>
 
-        <h2>200+</h2>
+        <h2><?php echo $categoryData['total']; ?></h2>
 
-        <p>Active Users</p>
-
-    </div>
-
-    <div class="stat-card">
-
-        <i class="fa-solid fa-handshake"></i>
-
-        <h2>150+</h2>
-
-        <p>Successful Deals</p>
-
-    </div>
-
-    <div class="stat-card">
-
-        <i class="fa-solid fa-headset"></i>
-
-        <h2>24/7</h2>
-
-        <p>Customer Support</p>
+        <p>Categories</p>
 
     </div>
 
@@ -123,86 +141,43 @@ include("../includes/header.php");
 
         <h2>Browse Categories</h2>
 
-        <p>Choose a category to find what you're looking for.</p>
+        <p>Choose a category to explore products.</p>
 
     </div>
 
     <div class="category-grid">
 
-        <a href="../products/products.php?category=Electronics" class="category-card">
+        <?php
 
-            <i class="fa-solid fa-mobile-screen-button"></i>
+        while($category = mysqli_fetch_assoc($categoryResult))
+        {
 
-            <h3>Electronics</h3>
+        ?>
 
-            <span>Products</span>
+        <a href="../products/products.php?category=<?php echo $category['id']; ?>" class="category-card">
 
-        </a>
+            <i class="fa-solid <?php echo $category['icon']; ?>"></i>
 
-        <a href="../products/products.php?category=Computers" class="category-card">
-
-            <i class="fa-solid fa-laptop"></i>
-
-            <h3>Computers</h3>
-
-            <span>Products</span>
+            <h3><?php echo htmlspecialchars($category['category_name']); ?></h3>
 
         </a>
 
-        <a href="../products/products.php?category=Books" class="category-card">
+        <?php
 
-            <i class="fa-solid fa-book"></i>
+        }
 
-            <h3>Books</h3>
-
-            <span>Products</span>
-
-        </a>
-
-        <a href="../products/products.php?category=Clothes" class="category-card">
-
-            <i class="fa-solid fa-shirt"></i>
-
-            <h3>Clothes</h3>
-
-            <span>Products</span>
-
-        </a>
-
-        <a href="../products/products.php?category=Furniture" class="category-card">
-
-            <i class="fa-solid fa-couch"></i>
-
-            <h3>Furniture</h3>
-
-            <span>Products</span>
-
-        </a>
-
-        <a href="../products/products.php?category=Vehicles" class="category-card">
-
-            <i class="fa-solid fa-car"></i>
-
-            <h3>Vehicles</h3>
-
-            <span>Products</span>
-
-        </a>
+        ?>
 
     </div>
 
 </section>
-
-<?php
-include("../db.php");
-?>
 <section class="latest-products">
 
     <div class="section-title">
 
         <h2>Latest Products</h2>
 
-        <p>Recently added products from our marketplace.</p>
+        <p>Recently added products on SecondPasal</p>
 
     </div>
 
@@ -210,63 +185,64 @@ include("../db.php");
 
 <?php
 
-$sql = "SELECT * FROM products
-        ORDER BY id DESC
-        LIMIT 6";
-
-$result = mysqli_query($conn,$sql);
-
-if(mysqli_num_rows($result)>0)
+if(mysqli_num_rows($productResult)>0)
 {
 
-while($row=mysqli_fetch_assoc($result))
+while($product=mysqli_fetch_assoc($productResult))
 {
 
 ?>
 
-<div class="product-card">
+        <div class="product-card">
 
-    <img src="../uploads/<?php echo htmlspecialchars($row['image']); ?>">
+         <?php
+$image = !empty($product['image']) ? $product['image'] : 'no-image.png';
+?>
 
-    <div class="product-info">
+<img src="../uploads/<?php echo htmlspecialchars($image); ?>" alt="Product" placeholder="SecondPasal/uploads/no-image.png">
 
-        <h3>
+            <div class="product-info">
 
-            <?php echo htmlspecialchars($row['title']); ?>
+                <h3>
+                    <?php echo htmlspecialchars($product['title']); ?>
+                </h3>
 
-        </h3>
+                <div class="price">
+                    Rs. <?php echo number_format($product['price']); ?>
+                </div>
 
-        <h4>
+                <p class="location">
+                    📍 <?php echo htmlspecialchars($product['location']); ?>
+                </p>
 
-            Rs. <?php echo number_format($row['price']); ?>
+                <p class="condition">
+                    Condition:
+                    <strong><?php echo htmlspecialchars($product['condition_type']); ?></strong>
+                </p>
 
-        </h4>
+                <div class="product-buttons">
 
-        <p>
+                    <a href="../products/product_details.php?id=<?php echo $product['id']; ?>" class="details-btn">
 
-            📍 <?php echo htmlspecialchars($row['location']); ?>
+                        View Details
 
-        </p>
+                    </a>
 
-        <div class="product-buttons">
+<?php if(isset($_SESSION['user_id']) && $_SESSION['user_id']!=$product['user_id']){ ?>
 
-            <a href="../products/product_details.php?id=<?php echo $row['id']; ?>">
+                    <a href="../chat/chat.php?user=<?php echo $product['user_id']; ?>&product=<?php echo $product['id']; ?>" class="message-btn">
 
-                View Details
+                        Message
 
-            </a>
+                    </a>
 
-            <a href="../chat/chat.php?user=<?php echo $row['user_id']; ?>">
+<?php } ?>
 
-                Message
+                </div>
 
-            </a>
+            </div>
 
         </div>
-
-    </div>
-
-</div>
 
 <?php
 
@@ -276,7 +252,11 @@ while($row=mysqli_fetch_assoc($result))
 else
 {
 
-echo "<h3>No products available.</h3>";
+?>
+
+<p>No products available.</p>
+
+<?php
 
 }
 
@@ -285,6 +265,3 @@ echo "<h3>No products available.</h3>";
     </div>
 
 </section>
-
-</body>
-</html>

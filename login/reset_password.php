@@ -1,80 +1,30 @@
 <?php
-
+date_default_timezone_set('Asia/Kathmandu');
 session_start();
 include("../db.php");
 
-$message = "";
-
-// Check if token exists
 if(!isset($_GET['token']))
 {
-    die("Invalid Reset Link.");
+    die("Invalid password reset link.");
 }
 
 $token = $_GET['token'];
+$tokenHash = hash("sha256", $token);
 
-// Verify token
 $stmt = mysqli_prepare($conn,
-"SELECT email, expires_at FROM password_resets WHERE token=?");
+"SELECT id
+FROM users
+WHERE reset_token=?
+AND reset_expires > NOW()");
 
-mysqli_stmt_bind_param($stmt,"s",$token);
+mysqli_stmt_bind_param($stmt, "s", $tokenHash);
 mysqli_stmt_execute($stmt);
 
 $result = mysqli_stmt_get_result($stmt);
 
-if(mysqli_num_rows($result)==0)
-{
-    die("Invalid or expired token.");
+if (mysqli_num_rows($result) == 0) {
+    die("This password reset link is invalid.");
 }
-
-$data = mysqli_fetch_assoc($result);
-
-// Check expiry
-if(strtotime($data['expires_at']) < time())
-{
-    die("This reset link has expired.");
-}
-
-$email = $data['email'];
-
-// Update password
-if(isset($_POST['change']))
-{
-    $password = $_POST['password'];
-    $confirm  = $_POST['confirm_password'];
-
-    if($password != $confirm)
-    {
-        $message = "<p style='color:red;'>Passwords do not match.</p>";
-    }
-    else
-    {
-        $hash = password_hash($password,PASSWORD_DEFAULT);
-
-        $update = mysqli_prepare($conn,
-        "UPDATE users SET password=? WHERE email=?");
-
-        mysqli_stmt_bind_param($update,"ss",$hash,$email);
-
-        if(mysqli_stmt_execute($update))
-        {
-            // Delete used token
-            $delete = mysqli_prepare($conn,
-            "DELETE FROM password_resets WHERE email=?");
-
-            mysqli_stmt_bind_param($delete,"s",$email);
-            mysqli_stmt_execute($delete);
-
-            header("Location: login.php?reset=success");
-            exit();
-        }
-        else
-        {
-            $message = "<p style='color:red;'>Password update failed.</p>";
-        }
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -82,79 +32,89 @@ if(isset($_POST['change']))
 
 <head>
 
-<title>Reset Password | SecondPasal</title>
+<meta charset="UTF-8">
+
+<title>Reset Password</title>
+
+<link rel="stylesheet" href="../assets/css/reset_password.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<h2>Reset Password</h2>
+<div class="reset-container">
 
-<?php echo $message; ?>
+<div class="reset-box">
 
-<form method="POST">
+<h2>Create New Password</h2>
+
+<p>Please enter your new password.</p>
+
+<form action="reset_password_process.php" method="POST">
+
+<input
+type="hidden"
+name="token"
+value="<?php echo htmlspecialchars($token); ?>">
+
+<div class="input-box">
+
+<label>New Password</label>
+
+<div class="input-field">
+
+<i class="fa-solid fa-lock"></i>
 
 <input
 type="password"
 id="password"
 name="password"
-placeholder="New Password"
 required>
 
-<button
-type="button"
-onclick="toggle('password')">
+<i class="fa-solid fa-eye toggle-password"
+id="togglePassword"></i>
 
-👁
+</div>
 
-</button>
+</div>
 
-<br><br>
+<div class="input-box">
+
+<label>Confirm Password</label>
+
+<div class="input-field">
+
+<i class="fa-solid fa-lock"></i>
 
 <input
 type="password"
-id="confirm"
+id="confirm_password"
 name="confirm_password"
-placeholder="Confirm Password"
 required>
 
-<button
-type="button"
-onclick="toggle('confirm')">
+<i class="fa-solid fa-eye toggle-confirm"
+id="toggleConfirm"></i>
 
-👁
+</div>
 
-</button>
+</div>
 
-<br><br>
+<button class="reset-btn">
 
-<button
-type="submit"
-name="change">
-
-Update Password
+Reset Password
 
 </button>
 
 </form>
 
-<script>
+</div>
 
-function toggle(id)
-{
-    let input = document.getElementById(id);
+</div>
 
-    if(input.type==="password")
-    {
-        input.type="text";
-    }
-    else
-    {
-        input.type="password";
-    }
-}
-
-</script>
+<script src="../assets/js/reset_password.js"></script>
 
 </body>
 

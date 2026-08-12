@@ -1,193 +1,212 @@
 <?php
-
 session_start();
-include("../db.php");
 
-if(isset($_POST['register']))
+if(isset($_SESSION['user_id']))
 {
-    $name = trim($_POST['name']);
-    $email = trim($_POST['email']);
-    $phone = trim($_POST['phone']);
-    $password = $_POST['password'];
-    $confirm = $_POST['confirm_password'];
-
-    // Check if all fields are filled
-    if(empty($name) || empty($email) || empty($phone) || empty($password) || empty($confirm))
-    {
-        $error = "Please fill in all fields.";
-    }
-
-    // Passwords must match
-    elseif($password != $confirm)
-    {
-        $error = "Passwords do not match.";
-    }
-
-    else
-    {
-        // Check if email already exists
-        $check = mysqli_prepare($conn, "SELECT id FROM users WHERE email = ?");
-        mysqli_stmt_bind_param($check, "s", $email);
-        mysqli_stmt_execute($check);
-        mysqli_stmt_store_result($check);
-
-        if(mysqli_stmt_num_rows($check) > 0)
-        {
-            $error = "Email already exists.";
-        }
-        else
-        {
-            // Hash password
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-            // Insert user
-            $stmt = mysqli_prepare($conn,
-                "INSERT INTO users(name,email,phone,password)
-                 VALUES(?,?,?,?)");
-
-            mysqli_stmt_bind_param(
-                $stmt,
-                "ssss",
-                $name,
-                $email,
-                $phone,
-                $hashedPassword
-            );
-
-            if(mysqli_stmt_execute($stmt))
-            {
-                header("Location: login.php?registered=1");
-                exit();
-            }
-            else
-            {
-                $error = "Registration failed.";
-            }
-
-            mysqli_stmt_close($stmt);
-        }
-
-        mysqli_stmt_close($check);
-    }
+    header("Location: ../homepage/homepage.php");
+    exit();
 }
-
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Register | SecondPasal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register | SecondPasal</title>
+
+<link rel="stylesheet" href="../assets/css/register.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<h2>Create Account</h2>
+<div class="register-container">
 
-<?php
-if(isset($error))
-{
-    echo "<p style='color:red;'>$error</p>";
-}
-?>
+    <!-- Left Panel -->
 
-<form method="POST">
+    <div class="left-panel">
 
-    <input
-        type="text"
-        name="name"
-        placeholder="Full Name"
-        required>
+        <img src="../assets/images/logo.png" class="logo" alt="SecondPasal">
 
-    <br><br>
+        <h1>SecondPasal</h1>
 
-    <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required>
+        <p class="tagline">Buy. Sell. Save.</p>
 
-    <br><br>
+        <p class="description">
+            Create your account and start buying or selling second-hand products across Nepal.
+        </p>
 
-    <input
-        type="text"
-        name="phone"
-        placeholder="Phone Number"
-        required>
+        <div class="features">
 
-    <br><br>
+            <p><i class="fa-solid fa-circle-check"></i> Free Registration</p>
 
-    <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Password"
-        required>
+            <p><i class="fa-solid fa-circle-check"></i> Secure Marketplace</p>
 
-    <button
-        type="button"
-        onclick="togglePassword('password')">
-        👁
-    </button>
+            <p><i class="fa-solid fa-circle-check"></i> Easy Communication</p>
 
-    <br><br>
+            <p><i class="fa-solid fa-circle-check"></i> Fast Selling</p>
 
-    <input
-        type="password"
-        name="confirm_password"
-        id="confirm_password"
-        placeholder="Confirm Password"
-        required>
+        </div>
 
-    <button
-        type="button"
-        onclick="togglePassword('confirm_password')">
-        👁
-    </button>
+    </div>
 
-    <br><br>
+    <!-- Right Panel -->
 
-    <button
-        type="submit"
-        name="register">
+    <div class="right-panel">
 
-        Register
+        <h2>Create Account</h2>
 
-    </button>
+        <p>Join SecondPasal today.</p>
 
-</form>
+        <?php
+        if(isset($_GET['error']))
+        {
+            echo "<div class='error'>".$_GET['error']."</div>";
+        }
 
-<p>
+        if(isset($_GET['success']))
+        {
+            echo "<div class='success'>Registration Successful. Please Login.</div>";
+        }
+        ?>
 
-Already have an account?
+        <form action="register_process.php" method="POST">
 
-<a href="login.php">
+         <div class="form-row">
 
-Login
+    <div class="input-box">
 
-</a>
+        <label>Full Name</label>
 
-</p>
+        <div class="input-field">
 
-<script>
+            <i class="fa-solid fa-user"></i>
 
-function togglePassword(id)
-{
-    let input = document.getElementById(id);
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter your full name"
+                required>
 
-    if(input.type === "password")
-    {
-        input.type = "text";
-    }
-    else
-    {
-        input.type = "password";
-    }
-}
+        </div>
 
-</script>
+    </div>
+
+    <div class="input-box">
+
+        <label>Phone Number</label>
+
+        <div class="input-field">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <input
+                type="text"
+                name="phone"
+                placeholder="98XXXXXXXX"
+                required>
+
+        </div>
+
+    </div>
+
+</div>
+            <div class="input-box">
+
+                <label>Email</label>
+
+                <div class="input-field">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                        placeholder="Enter your email">
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Password</label>
+
+                <div class="input-field">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        placeholder="Create password">
+
+                    <i class="fa-solid fa-eye toggle-password"
+                       id="togglePassword"></i>
+
+                </div>
+
+            </div>
+
+            <div class="input-box">
+
+                <label>Confirm Password</label>
+
+                <div class="input-field">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        required
+                        placeholder="Confirm password">
+
+                    <i class="fa-solid fa-eye toggle-confirm"
+                       id="toggleConfirm"></i>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="register-btn">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+        <div class="login-link">
+
+            Already have an account?
+
+            <a href="login.php">
+
+                Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../assets/js/register.js"></script>
 
 </body>
 
