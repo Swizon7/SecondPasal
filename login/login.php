@@ -7,18 +7,10 @@ if(isset($_SESSION['user_id']))
     exit();
 }
 ?>
-<?php
 
-if(isset($_GET['reset']))
-{
-    echo "<div class='success'>
-            Password reset successfully.
-          </div>";
-}
 
-?>
 
-<!DOCTYPE html>
+<!DOCTYPE html>     
 <html lang="en">
 
 <head>
