@@ -1,0 +1,179 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7f5;
+    color:#333;
+}
+
+.listings-page{
+    width:90%;
+    margin:40px auto;
+}
+
+.listings-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.listings-header h1{
+    color:#355E3B;
+    font-size:34px;
+    margin-bottom:6px;
+}
+
+.listings-header p{
+    color:#777;
+}
+
+.sell-btn{
+    display:inline-block;
+    background:#355E3B;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.sell-btn:hover{
+    background:#2c4d31;
+}
+
+.success-message{
+    background:#d4edda;
+    color:#155724;
+    border-left:5px solid #28a745;
+    padding:14px 18px;
+    border-radius:8px;
+    margin-bottom:25px;
+}
+
+.listing-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.listing-card{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.image-container{
+    position:relative;
+}
+
+.image-container img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+}
+
+.status-badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:600;
+    background:#fff;
+}
+
+.status-badge.available{
+    color:#198754;
+}
+
+.status-badge.sold{
+    color:#dc3545;
+}
+
+.listing-content{
+    padding:20px;
+}
+
+.listing-content h2{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.price{
+    color:#355E3B;
+    font-size:23px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.listing-content p{
+    color:#666;
+    font-size:14px;
+    margin:8px 0;
+}
+
+.listing-content p i{
+    width:20px;
+    color:#355E3B;
+}
+
+.listing-actions{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+}
+
+.listing-actions a{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    padding:9px 5px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:14px;
+}
+
+.view-btn{
+    background:#355E3B;
+    color:#fff;
+}
+
+.edit-btn{
+    background:#FFD700;
+    color:#333;
+}
+
+.delete-btn{
+    background:#dc3545;
+    color:#fff;
+}
+
+.empty-state{
+    background:#fff;
+    padding:70px 30px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.empty-state i{
+    font-size:60px;
+    color:#355E3B;
+    margin-bottom:20px;
+}
+
+.empty-state h2{
+    margin-bottom:10px;
+}
+
+.empty-state p{
+    color:#777;
+    margin-bottom:25px;
+}

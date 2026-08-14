@@ -107,7 +107,7 @@ Rs. <?php echo number_format($product['price']); ?>
 
 <strong>Views:</strong>
 
-<?php echo $product['views']+1; ?>
+<?php echo (int)$product['views']; ?>
 
 </p>
 

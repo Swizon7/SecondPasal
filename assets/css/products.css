@@ -1,0 +1,274 @@
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7f5;
+    color:#333;
+}
+
+.products-page{
+    width:90%;
+    margin:45px auto;
+}
+
+.products-heading{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.products-heading h1{
+    font-size:36px;
+    color:#355E3B;
+    margin-bottom:8px;
+}
+
+.products-heading p{
+    color:#777;
+}
+
+/* Filters */
+
+.filter-box{
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+
+    display:grid;
+    grid-template-columns:2fr 1.2fr 1.2fr 1fr 1fr auto auto;
+    gap:15px;
+    align-items:end;
+
+    margin-bottom:30px;
+}
+
+.filter-group label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+
+.filter-group input,
+.filter-group select{
+    width:100%;
+    height:45px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:0 12px;
+    outline:none;
+    background:#fafafa;
+}
+
+.filter-group input:focus,
+.filter-group select:focus{
+    border-color:#355E3B;
+    background:#fff;
+}
+
+.filter-btn,
+.clear-btn{
+    height:45px;
+    padding:0 18px;
+    border-radius:8px;
+    text-decoration:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    font-weight:600;
+    cursor:pointer;
+    border:none;
+}
+
+.filter-btn{
+    background:#355E3B;
+    color:#fff;
+}
+
+.clear-btn{
+    background:#e9ecef;
+    color:#333;
+}
+
+/* Results */
+
+.results-info{
+    margin-bottom:20px;
+}
+
+.results-info p{
+    color:#777;
+    font-size:14px;
+}
+
+/* Product Grid */
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.product-card{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.product-image{
+    position:relative;
+}
+
+.product-image img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+}
+
+.condition-badge{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:#fff;
+    color:#355E3B;
+    padding:6px 10px;
+    border-radius:15px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.product-content{
+    padding:18px;
+}
+
+.category-name{
+    color:#777;
+    font-size:12px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+}
+
+.product-content h2{
+    font-size:18px;
+    margin-bottom:10px;
+    color:#333;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.product-price{
+    font-size:23px;
+    font-weight:700;
+    color:#355E3B;
+    margin-bottom:10px;
+}
+
+.product-location,
+.product-views{
+    color:#666;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.product-location i,
+.product-views i{
+    color:#355E3B;
+    width:18px;
+}
+
+.product-actions{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+.view-btn,
+.message-btn{
+    text-decoration:none;
+    border-radius:8px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+}
+
+.view-btn{
+    flex:1;
+    background:#355E3B;
+    color:#fff;
+}
+
+.message-btn{
+    width:42px;
+    background:#FFD700;
+    color:#333;
+}
+
+/* Empty */
+
+.empty-products{
+    background:#fff;
+    text-align:center;
+    padding:70px;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.empty-products i{
+    font-size:60px;
+    color:#355E3B;
+    margin-bottom:20px;
+}
+
+.empty-products h2{
+    margin-bottom:10px;
+}
+
+.empty-products p{
+    color:#777;
+    margin-bottom:20px;
+}
+
+/* Pagination */
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:40px;
+}
+
+.pagination a{
+    min-width:40px;
+    height:40px;
+    padding:0 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    border-radius:8px;
+    background:#fff;
+    color:#333;
+    box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+
+.pagination a.active,
+.pagination a:hover{
+    background:#355E3B;
+    color:#fff;
+}

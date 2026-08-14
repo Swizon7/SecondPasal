@@ -41,6 +41,7 @@ LIMIT 8
 
 <link rel="stylesheet" href="/SecondPasal/assets/css/header.css">
 <link rel="stylesheet" href="/SecondPasal/assets/css/homepage.css">
+<link rel="stylesheet" href="../assets/css/footer.css">
 
 <!-- <link rel="stylesheet" href="homepage.css"> -->
 </head>
@@ -265,3 +266,86 @@ else
     </div>
 
 </section>
+
+<!-- Why Choose Us -->
+
+<section class="why-choose">
+
+    <div class="section-title">
+
+        <h2>Why Choose SecondPasal?</h2>
+
+        <p>
+            A simple and reliable way to buy and sell second-hand products.
+        </p>
+
+    </div>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <h3>Safe Marketplace</h3>
+
+            <p>
+                Connect with buyers and sellers through a secure and trusted marketplace.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+
+            <h3>Easy Communication</h3>
+
+            <p>
+                Chat directly with sellers and buyers to discuss products before making a deal.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-tags"></i>
+            </div>
+
+            <h3>Affordable Prices</h3>
+
+            <p>
+                Find quality second-hand products at prices that fit your budget.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                <i class="fa-solid fa-recycle"></i>
+            </div>
+
+            <h3>Give Items a Second Life</h3>
+
+            <p>
+                Reuse products, reduce waste, and help useful items find new owners.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<?php include("../includes/footer.php"); ?>
+</body>
+</html>
