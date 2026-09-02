@@ -72,20 +72,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
     <!-- Search -->
 
-    <form action="/SecondPasal/products/products.php" method="GET" class="search-box">
+   <form action="/SecondPasal/products/products.php" method="GET" class="search-box">
 
-        <input
+    <input
         type="text"
         name="search"
-        placeholder="Search products...">
+        placeholder="Search products..."
+        value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
 
-        <button>
+    <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
 
-            <i class="fa fa-search"></i>
-
-        </button>
-
-    </form>
+</form>
 
     <!-- Right -->
 

@@ -163,11 +163,12 @@ include("../includes/header.php");
 
             <label>Search</label>
 
-            <input
-                type="text"
-                name="search"
-                placeholder="Search products..."
-                value="<?php echo htmlspecialchars($search); ?>">
+         <input
+    type="text"
+    name="search"
+    id="productSearch"
+    placeholder="Search products..."
+    value="<?php echo htmlspecialchars($search); ?>">
 
         </div>
 
@@ -437,5 +438,5 @@ include("../includes/header.php");
         </div>
 
     <?php } ?>
-
+<script src="../assets/js/product_search.js"></script>
 </div>
