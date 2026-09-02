@@ -56,6 +56,7 @@ $product = mysqli_fetch_assoc($result);
 ?>
 
 <?php include("../includes/header.php"); ?>
+<link rel="stylesheet" href="../assets/css/product_details.css">
 
 <section class="product-details">
 
@@ -147,6 +148,23 @@ Message Seller
 
 <?php } ?>
 
+<?php
+if (
+    isset($_SESSION['user_id']) &&
+    $_SESSION['user_id'] != $product['user_id']
+) {
+?>
+
+    <a
+        href="report_product.php?id=<?php echo $product['id']; ?>"
+        class="report-btn">
+
+        <i class="fa-solid fa-flag"></i>
+        Report Product
+
+    </a>
+
+<?php } ?>
 
 </div>
 
@@ -190,3 +208,58 @@ mysqli_stmt_execute($related);
 
 $relatedResult = mysqli_stmt_get_result($related);
 ?>
+<section class="related-products">
+
+    <h2>Related Products</h2>
+
+    <?php if(mysqli_num_rows($relatedResult) > 0){ ?>
+
+        <div class="related-grid">
+
+            <?php while($relatedProduct = mysqli_fetch_assoc($relatedResult)){ ?>
+
+                <div class="related-card">
+
+                    <?php if(!empty($relatedProduct['image'])){ ?>
+
+                        <img
+                            src="../uploads/<?php echo htmlspecialchars($relatedProduct['image']); ?>"
+                            alt="<?php echo htmlspecialchars($relatedProduct['title']); ?>">
+
+                    <?php } ?>
+
+                    <div class="related-content">
+
+                        <h3>
+                            <?php echo htmlspecialchars($relatedProduct['title']); ?>
+                        </h3>
+
+                        <div class="related-price">
+                            Rs. <?php echo number_format($relatedProduct['price'], 2); ?>
+                        </div>
+
+                        <a
+                            href="product_details.php?id=<?php echo $relatedProduct['id']; ?>"
+                            class="related-btn">
+
+                            View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            <?php } ?>
+
+        </div>
+
+    <?php } else { ?>
+
+        <div class="no-related">
+            No related products available.
+        </div>
+
+    <?php } ?>
+
+</section>

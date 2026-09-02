@@ -209,3 +209,20 @@ nav a.active{
     display:block;
 
 }
+
+.admin-dashboard-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:9px 14px;
+    background:#355E3B;
+    color:#fff;
+    text-decoration:none;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.admin-dashboard-btn:hover{
+    background:#2c4d31;
+}

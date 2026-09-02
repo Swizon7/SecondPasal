@@ -89,6 +89,26 @@ if(isset($_GET['reset']))
           </div>";
 }
 ?>
+<?php
+
+if (isset($_GET['verified']) &&
+    $_GET['verified'] === 'success') {
+
+    echo '<div class="success-message">
+            Email verified successfully.
+            You can now log in.
+          </div>';
+}
+
+if (isset($_GET['error']) &&
+    $_GET['error'] === 'email_not_verified') {
+
+    echo '<div class="error-message">
+            Please verify your email before logging in.
+          </div>';
+}
+
+?>
         <form action="login_process.php" method="POST">
 
             <div class="input-box">

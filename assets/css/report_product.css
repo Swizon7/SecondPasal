@@ -1,0 +1,131 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7f5;
+    color:#333;
+}
+
+.report-page{
+    width:100%;
+    padding:60px 0;
+}
+
+.report-card{
+    width:600px;
+    margin:0 auto;
+    background:#fff;
+    padding:40px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.report-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.report-icon{
+    width:65px;
+    height:65px;
+    margin:0 auto 15px;
+    border-radius:50%;
+    background:#fff1f1;
+    color:#dc3545;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+}
+
+.report-title h1{
+    color:#355E3B;
+    font-size:30px;
+    margin-bottom:7px;
+}
+
+.report-title p{
+    color:#777;
+    font-size:14px;
+}
+
+.reported-product{
+    background:#f5f7f5;
+    padding:13px 15px;
+    border-radius:8px;
+    margin-bottom:22px;
+    font-size:14px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:9px;
+    outline:none;
+    padding:12px 14px;
+    font-size:14px;
+    background:#fafafa;
+}
+
+.form-group select{
+    height:48px;
+}
+
+.form-group textarea{
+    resize:none;
+}
+
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#355E3B;
+    background:#fff;
+}
+
+.report-submit{
+    width:100%;
+    height:50px;
+    border:none;
+    border-radius:9px;
+    background:#dc3545;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.report-submit:hover{
+    background:#b02a37;
+}
+
+.cancel-report{
+    display:block;
+    margin-top:12px;
+    text-align:center;
+    color:#355E3B;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.report-error{
+    background:#ffe6e6;
+    color:#c62828;
+    border-left:5px solid #dc3545;
+    padding:12px 15px;
+    border-radius:8px;
+    margin-bottom:20px;
+}

@@ -81,3 +81,113 @@ function sendResetEmail($toEmail, $toName, $resetLink)
 }
 
 }
+function sendVerificationEmail($toEmail, $toName, $verificationLink)
+{
+    $mail = new PHPMailer(true);
+
+    try {
+
+        $mail->isSMTP();
+
+        $mail->Host = "smtp.gmail.com";
+        $mail->SMTPAuth = true;
+
+        $mail->Username = "mhrznsuiizon@gmail.com";
+        $mail->Password = "vualjvbhrportdag";
+
+        $mail->SMTPSecure =
+            PHPMailer::ENCRYPTION_STARTTLS;
+
+        $mail->Port = 587;
+
+        $mail->setFrom(
+            "mhrznsuiizon@gmail.com",
+            "SecondPasal"
+        );
+
+        $mail->addAddress(
+            $toEmail,
+            $toName
+        );
+
+        $mail->isHTML(true);
+
+        $mail->Subject =
+            "Verify Your SecondPasal Account";
+
+        $safeName =
+            htmlspecialchars($toName);
+
+        $safeLink =
+            htmlspecialchars($verificationLink);
+
+        $mail->Body = "
+            <div style='font-family:Arial,sans-serif;
+                        max-width:600px;
+                        margin:auto;
+                        padding:30px;'>
+
+                <h2 style='color:#355E3B;'>
+                    Welcome to SecondPasal!
+                </h2>
+
+                <p>
+                    Hello <strong>{$safeName}</strong>,
+                </p>
+
+                <p>
+                    Thank you for creating your SecondPasal account.
+                    Please verify your email address to activate your account.
+                </p>
+
+                <p style='margin:30px 0;'>
+
+                    <a href='{$safeLink}'
+                       style='background:#355E3B;
+                              color:#ffffff;
+                              padding:14px 22px;
+                              text-decoration:none;
+                              border-radius:8px;
+                              font-weight:bold;'>
+                        Verify Email
+                    </a>
+
+                </p>
+
+                <p>
+                    This verification link will expire in
+                    <strong>30 minutes</strong>.
+                </p>
+
+                <p>
+                    If you did not create this account,
+                    you can safely ignore this email.
+                </p>
+
+                <br>
+
+                <strong>
+                    SecondPasal Team
+                </strong>
+
+            </div>
+        ";
+
+        $mail->AltBody =
+            "Verify your SecondPasal account here:\n"
+            . $verificationLink;
+
+        $mail->send();
+
+        return true;
+
+    } catch (Exception $e) {
+
+        error_log(
+            "Verification Mail Error: "
+            . $mail->ErrorInfo
+        );
+
+        return false;
+    }
+}

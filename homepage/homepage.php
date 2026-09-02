@@ -25,7 +25,7 @@ SELECT
 FROM products
 INNER JOIN users
 ON products.user_id = users.id
-WHERE status='available'
+WHERE products.status = 'available'
 ORDER BY created_at DESC
 LIMIT 8
 ");

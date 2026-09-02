@@ -65,3 +65,316 @@
 .card a{
     margin:15px;
 }
+
+/* =========================================
+   SECOND PASAL - PRODUCT DETAILS
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7f5;
+    color:#333;
+}
+
+/* =========================================
+   PRODUCT DETAILS
+========================================= */
+
+.product-details{
+    width:1100px;
+    margin:55px auto 35px;
+
+    display:grid;
+    grid-template-columns:52% 48%;
+
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+/* =========================================
+   LEFT IMAGE
+========================================= */
+
+.product-details .left{
+    background:#f8faf8;
+
+    min-height:520px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:35px;
+}
+
+.product-details .left img{
+    width:100%;
+    max-width:520px;
+    height:450px;
+
+    object-fit:contain;
+
+    border-radius:12px;
+    background:#fff;
+}
+
+/* =========================================
+   RIGHT INFORMATION
+========================================= */
+
+.product-details .right{
+    padding:45px 45px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.product-details .right h1{
+    color:#355E3B;
+    font-size:34px;
+    line-height:1.3;
+    margin-bottom:18px;
+}
+
+/* =========================================
+   PRICE
+========================================= */
+
+.product-details .price{
+    color:#355E3B;
+    font-size:32px;
+    font-weight:700;
+
+    margin-bottom:25px;
+}
+
+/* =========================================
+   PRODUCT INFORMATION
+========================================= */
+
+.product-details .right p{
+    font-size:15px;
+    color:#666;
+    margin-bottom:14px;
+
+    line-height:1.6;
+}
+
+.product-details .right p strong{
+    color:#333;
+    display:inline-block;
+    width:100px;
+}
+
+/* =========================================
+   MESSAGE SELLER
+========================================= */
+
+.message-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    width:100%;
+    height:50px;
+
+    margin-top:18px;
+
+    background:#355E3B;
+    color:#fff;
+
+    text-decoration:none;
+
+    border-radius:9px;
+
+    font-size:15px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.message-btn:hover{
+    background:#2c4d31;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(53,94,59,.2);
+}
+
+/* =========================================
+   REPORT BUTTON
+========================================= */
+
+.report-btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    width:100%;
+    height:45px;
+
+    margin-top:10px;
+
+    background:#fff;
+    color:#dc3545;
+
+    border:1px solid #dc3545;
+
+    text-decoration:none;
+
+    border-radius:9px;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.report-btn:hover{
+    background:#dc3545;
+    color:#fff;
+}
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description{
+    width:1100px;
+    margin:0 auto 35px;
+
+    background:#fff;
+
+    padding:35px 40px;
+
+    border-radius:16px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+}
+
+.description h2{
+    color:#355E3B;
+    font-size:24px;
+    margin-bottom:15px;
+}
+
+.description p{
+    color:#666;
+    line-height:1.8;
+    font-size:15px;
+    white-space:normal;
+}
+
+/* =========================================
+   RELATED PRODUCTS
+========================================= */
+
+.related-products{
+    width:1100px;
+    margin:0 auto 70px;
+}
+
+.related-products h2{
+    color:#355E3B;
+    font-size:26px;
+    margin-bottom:25px;
+}
+
+.related-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.related-card{
+    background:#fff;
+    border-radius:14px;
+    overflow:hidden;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+
+    transition:.3s;
+}
+
+.related-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.related-card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+
+.related-content{
+    padding:16px;
+}
+
+.related-content h3{
+    font-size:17px;
+    color:#333;
+
+    margin-bottom:8px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.related-price{
+    color:#355E3B;
+    font-size:19px;
+    font-weight:700;
+
+    margin-bottom:12px;
+}
+
+.related-btn{
+    display:block;
+
+    width:100%;
+
+    padding:9px;
+
+    text-align:center;
+
+    background:#355E3B;
+    color:#fff;
+
+    text-decoration:none;
+
+    border-radius:7px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+.related-btn:hover{
+    background:#2c4d31;
+}
+
+/* =========================================
+   NO RELATED PRODUCTS
+========================================= */
+
+.no-related{
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+
+    color:#777;
+    text-align:center;
+}

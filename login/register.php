@@ -66,16 +66,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         <p>Join SecondPasal today.</p>
 
         <?php
-        if(isset($_GET['error']))
-        {
-            echo "<div class='error'>".$_GET['error']."</div>";
-        }
 
-        if(isset($_GET['success']))
-        {
-            echo "<div class='success'>Registration Successful. Please Login.</div>";
-        }
-        ?>
+if (isset($_GET['error'])) {
+
+    echo "<div class='error'>"
+        . htmlspecialchars($_GET['error'])
+        . "</div>";
+}
+
+if (isset($_GET['success']) &&
+    $_GET['success'] === 'verification_sent') {
+
+    echo "<div class='success'>
+            Verification email sent successfully.
+            Please check your Gmail inbox and verify your account.
+          </div>";
+}
+
+?>
 
         <form action="register_process.php" method="POST">
 

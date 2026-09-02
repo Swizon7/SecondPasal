@@ -62,15 +62,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <a href="#">
 
-            About
+            Categories
 
         </a>
 
-        <a href="#">
-
-            Contact
-
-        </a>
+      <a href="/SecondPasal/contact.php">Contact</a>
 
     </nav>
 
@@ -122,6 +118,7 @@ if(isset($_SESSION['user_id']))
                 <i class="fa fa-angle-down"></i>
 
             </button>
+            
 
             <div class="dropdown-content">
 
@@ -142,6 +139,15 @@ if(isset($_SESSION['user_id']))
                     Profile
 
                 </a>
+                
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
+
+    <a href="/SecondPasal/admin/dashboard.php" class="admin-dashboard-btn">
+        <i class="fa-solid fa-user-shield"></i>
+        Admin Panel
+    </a>
+
+<?php } ?>
 
                 <a href="/SecondPasal/login/logout.php">
 
