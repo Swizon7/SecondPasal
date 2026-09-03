@@ -1,16 +1,15 @@
 <?php
+
 session_start();
 
-if(isset($_SESSION['user_id']))
-{
+if (isset($_SESSION['user_id'])) {
     header("Location: ../homepage/homepage.php");
     exit();
 }
+
 ?>
 
-
-
-<!DOCTYPE html>     
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,7 +23,7 @@ if(isset($_SESSION['user_id']))
     <link rel="stylesheet" href="../assets/css/login.css">
 
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -36,29 +35,48 @@ if(isset($_SESSION['user_id']))
 
     <div class="left-panel">
 
-        <img src="../assets/images/logo.png" class="logo" alt="SecondPasal">
+        <img
+            src="../assets/images/logo.png"
+            class="logo"
+            alt="SecondPasal">
 
         <h1>SecondPasal</h1>
 
-        <p class="tagline">Buy. Sell. Save.</p>
+        <p class="tagline">
+            Buy. Sell. Save.
+        </p>
 
         <p class="description">
-            Nepal's trusted marketplace for buying and selling second-hand products.
+            Nepal's trusted marketplace for buying and selling
+            second-hand products.
         </p>
 
         <div class="features">
 
-            <p><i class="fa-solid fa-circle-check"></i> Secure Marketplace</p>
+            <p>
+                <i class="fa-solid fa-circle-check"></i>
+                Secure Marketplace
+            </p>
 
-            <p><i class="fa-solid fa-circle-check"></i> Easy Communication</p>
+            <p>
+                <i class="fa-solid fa-circle-check"></i>
+                Easy Communication
+            </p>
 
-            <p><i class="fa-solid fa-circle-check"></i> Fast Selling</p>
+            <p>
+                <i class="fa-solid fa-circle-check"></i>
+                Fast Selling
+            </p>
 
-            <p><i class="fa-solid fa-circle-check"></i> Thousands of Listings</p>
+            <p>
+                <i class="fa-solid fa-circle-check"></i>
+                Thousands of Listings
+            </p>
 
         </div>
 
     </div>
+
 
     <!-- RIGHT PANEL -->
 
@@ -68,47 +86,115 @@ if(isset($_SESSION['user_id']))
 
         <p>Sign in to continue</p>
 
+
+        <!-- =========================
+             SUCCESS / ERROR MESSAGES
+        ========================== -->
+
         <?php
-        if(isset($_GET['error']))
-        {
-            echo "<div class='error'>Invalid email or password.</div>";
-        }
+
+        /* Registration success */
+        if (
+            isset($_GET['registered']) &&
+            $_GET['registered'] === 'success'
+        ) {
         ?>
 
+            <div class="success">
+                🎉 Registration successful!
+                Please verify your Gmail before logging in.
+            </div>
+
         <?php
-if(isset($_GET['registered']))
-{
-    echo "<div class='success'>🎉 Registration successful! Please login.</div>";
-}
-?>
-<?php
-if(isset($_GET['reset']))
-{
-    echo "<div class='success'>
-            Password changed successfully. Please login.
-          </div>";
-}
-?>
-<?php
+        }
 
-if (isset($_GET['verified']) &&
-    $_GET['verified'] === 'success') {
 
-    echo '<div class="success-message">
-            Email verified successfully.
-            You can now log in.
-          </div>';
-}
+        /* Password reset success */
+        if (
+            isset($_GET['reset']) &&
+            $_GET['reset'] === 'success'
+        ) {
+        ?>
 
-if (isset($_GET['error']) &&
-    $_GET['error'] === 'email_not_verified') {
+            <div class="success">
+                <i class="fa-solid fa-circle-check"></i>
+                Password changed successfully. Please login.
+            </div>
 
-    echo '<div class="error-message">
-            Please verify your email before logging in.
-          </div>';
-}
+        <?php
+        }
 
-?>
+
+        /* Email verification success */
+        if (
+            isset($_GET['verified']) &&
+            $_GET['verified'] === 'success'
+        ) {
+        ?>
+
+            <div class="success">
+                <i class="fa-solid fa-circle-check"></i>
+                Email verified successfully. You can now log in.
+            </div>
+
+        <?php
+        }
+
+
+        /* Error messages */
+        if (isset($_GET['error'])) {
+
+            $error = $_GET['error'];
+
+            if ($error === 'email_not_verified') {
+        ?>
+
+                <div class="error">
+                    <i class="fa-solid fa-envelope-circle-check"></i>
+                    Please verify your Gmail address before logging in.
+                </div>
+
+        <?php
+
+            } elseif ($error === 'invalid') {
+        ?>
+
+                <div class="error">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Invalid email or password.
+                </div>
+
+        <?php
+
+            } elseif ($error === 'inactive') {
+        ?>
+
+                <div class="error">
+                    <i class="fa-solid fa-user-slash"></i>
+                    Your account has been deactivated.
+                </div>
+
+        <?php
+
+            } else {
+        ?>
+
+                <div class="error">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
+
+        <?php
+            }
+        }
+
+        ?>
+
+
+        <!-- =========================
+             LOGIN FORM
+        ========================== -->
+
         <form action="login_process.php" method="POST">
 
             <div class="input-box">
@@ -129,6 +215,7 @@ if (isset($_GET['error']) &&
 
             </div>
 
+
             <div class="input-box">
 
                 <label>Password</label>
@@ -146,31 +233,36 @@ if (isset($_GET['error']) &&
 
                     <i
                         class="fa-solid fa-eye toggle-password"
-                        id="togglePassword"></i>
+                        id="togglePassword">
+                    </i>
 
                 </div>
 
             </div>
 
+
             <div class="options">
 
                 <label>
 
-                    <input type="checkbox">
+                    <input
+                        type="checkbox"
+                        name="remember">
 
                     Remember Me
 
                 </label>
 
                 <a href="forgot_password.php">
-
                     Forgot Password?
-
                 </a>
 
             </div>
 
-            <button type="submit" class="login-btn">
+
+            <button
+                type="submit"
+                class="login-btn">
 
                 Login
 
@@ -178,14 +270,13 @@ if (isset($_GET['error']) &&
 
         </form>
 
+
         <div class="register">
 
             Don't have an account?
 
             <a href="register.php">
-
                 Register
-
             </a>
 
         </div>
@@ -193,6 +284,7 @@ if (isset($_GET['error']) &&
     </div>
 
 </div>
+
 
 <script src="../assets/js/login.js"></script>
 

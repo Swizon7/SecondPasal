@@ -1,0 +1,185 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7f5;
+    color:#333;
+}
+
+.profile-page{
+    width:100%;
+    padding:60px 0 80px;
+}
+
+.profile-card{
+    width:700px;
+    margin:0 auto;
+    background:#fff;
+    border-radius:18px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.profile-header{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding-bottom:30px;
+    margin-bottom:25px;
+    border-bottom:1px solid #e8ece8;
+}
+
+.profile-avatar{
+    width:80px;
+    height:80px;
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+    background:#eef5ef;
+    color:#355E3B;
+}
+
+.profile-avatar i{
+    font-size:34px;
+}
+
+.profile-header h1{
+    color:#355E3B;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.profile-header p{
+    color:#777;
+    font-size:14px;
+}
+
+.profile-info{
+    margin-bottom:30px;
+}
+
+.info-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 0;
+    border-bottom:1px solid #f0f2f0;
+}
+
+.info-label{
+    color:#555;
+    font-size:14px;
+    font-weight:600;
+}
+
+.info-label i{
+    width:22px;
+    color:#355E3B;
+    margin-right:7px;
+}
+
+.info-value{
+    color:#333;
+    font-size:14px;
+    text-align:right;
+}
+
+.status-badge{
+    padding:6px 12px;
+    border-radius:15px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status-badge.verified{
+    background:#dff3e4;
+    color:#198754;
+}
+
+.status-badge.unverified{
+    background:#fff4cc;
+    color:#8a6d00;
+}
+
+.profile-actions{
+    display:flex;
+    gap:10px;
+}
+
+.profile-actions a{
+    flex:1;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+}
+
+.edit-profile-btn{
+    background:#355E3B;
+    color:#fff;
+}
+
+.listings-btn{
+    background:#eef5ef;
+    color:#355E3B;
+}
+
+.logout-btn{
+    background:#ffe4e6;
+    color:#dc3545;
+}
+
+.edit-profile-btn:hover{
+    background:#2c4d31;
+}
+
+.listings-btn:hover{
+    background:#355E3B;
+    color:#fff;
+}
+
+.logout-btn:hover{
+    background:#dc3545;
+    color:#fff;
+}
+
+.profile-success{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    width:100%;
+
+    padding:13px 16px;
+    margin-bottom:25px;
+
+    background:#e8f5e9;
+    color:#2e7d32;
+
+    border-left:5px solid #43a047;
+    border-radius:8px;
+
+    font-size:14px;
+    font-weight:500;
+}
+
+.profile-success i{
+    font-size:16px;
+    color:#43a047;
+}

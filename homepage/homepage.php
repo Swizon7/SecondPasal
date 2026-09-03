@@ -41,7 +41,7 @@ LIMIT 8
 
 <link rel="stylesheet" href="/SecondPasal/assets/css/header.css">
 <link rel="stylesheet" href="/SecondPasal/assets/css/homepage.css">
-<link rel="stylesheet" href="../assets/css/footer.css">
+<!-- <link rel="stylesheet" href="../assets/css/footer.css"> -->
 
 <!-- <link rel="stylesheet" href="homepage.css"> -->
 </head>

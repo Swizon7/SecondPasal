@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/SecondPasal/assets/css/footer.css">
 <footer class="site-footer">
 
     <div class="footer-container">
