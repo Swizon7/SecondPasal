@@ -57,6 +57,42 @@ if (mysqli_num_rows($result) === 0) {
 
 $product = mysqli_fetch_assoc($result);
 
+// ==========================================
+// WISHLIST STATUS
+// ==========================================
+
+$isWishlisted = false;
+
+if (isset($_SESSION['user_id'])) {
+
+    $wishlistUserId = (int) $_SESSION['user_id'];
+
+    $wishlistCheck = mysqli_prepare(
+        $conn,
+        "SELECT id
+         FROM wishlist
+         WHERE user_id = ?
+         AND product_id = ?
+         LIMIT 1"
+    );
+
+    mysqli_stmt_bind_param(
+        $wishlistCheck,
+        "ii",
+        $wishlistUserId,
+        $id
+    );
+
+    mysqli_stmt_execute($wishlistCheck);
+
+    $wishlistResult = mysqli_stmt_get_result($wishlistCheck);
+
+    if (mysqli_num_rows($wishlistResult) > 0) {
+        $isWishlisted = true;
+    }
+
+    mysqli_stmt_close($wishlistCheck);
+}
 
 // ==========================================
 // UNIQUE VIEW COUNT
@@ -315,6 +351,33 @@ include("../includes/header.php");
                 Message Seller
 
             </a>
+            <?php if (isset($_SESSION['user_id'])) { ?>
+
+    <?php if ($isWishlisted) { ?>
+
+        <a
+            href="wishlist_action.php?action=remove&product_id=<?php echo (int)$product['id']; ?>"
+            class="wishlist-btn wishlisted">
+
+            <i class="fa-solid fa-heart"></i>
+            Remove from Wishlist
+
+        </a>
+
+    <?php } else { ?>
+
+        <a
+            href="wishlist_action.php?action=add&product_id=<?php echo (int)$product['id']; ?>"
+            class="wishlist-btn">
+
+            <i class="fa-regular fa-heart"></i>
+            Add to Wishlist
+
+        </a>
+
+    <?php } ?>
+
+<?php } ?>
 
 
             <a

@@ -378,3 +378,48 @@ body{
     color:#777;
     text-align:center;
 }
+
+/* =========================================
+   WISHLIST
+========================================= */
+
+.wishlist-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    width:100%;
+    height:45px;
+
+    margin-top:10px;
+
+    background:#fff;
+    color:#355E3B;
+
+    border:1px solid #355E3B;
+
+    text-decoration:none;
+    border-radius:9px;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.wishlist-btn:hover{
+    background:#355E3B;
+    color:#fff;
+}
+
+.wishlist-btn.wishlisted{
+    background:#fff0f0;
+    border-color:#dc3545;
+    color:#dc3545;
+}
+
+.wishlist-btn.wishlisted:hover{
+    background:#dc3545;
+    color:#fff;
+}

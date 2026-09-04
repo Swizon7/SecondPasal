@@ -139,6 +139,12 @@ if(isset($_SESSION['user_id']))
 
                 </a>
                 
+
+                <a href="../products/wishlist.php">
+    <i class="fa-solid fa-heart"></i>
+    <span>Wishlist</span>
+</a>
+
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
 
     <a href="/SecondPasal/admin/dashboard.php" class="admin-dashboard-btn">
