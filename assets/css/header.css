@@ -227,3 +227,9 @@ nav a.active{
     background:#2c4d31;
 }
 
+.nav-links a.active{
+    color:#FFD700;
+    font-weight:600;
+    border-bottom:2px solid #FFD700;
+    padding-bottom:6px;
+}

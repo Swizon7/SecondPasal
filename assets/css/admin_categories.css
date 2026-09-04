@@ -1,22 +1,45 @@
+/* =========================================
+   SECOND PASAL - ADMIN CATEGORIES
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* =========================================
+   CATEGORY LAYOUT
+========================================= */
+
 .category-layout{
     display:grid;
-    grid-template-columns:320px 1fr;
+    grid-template-columns:340px 1fr;
     gap:25px;
 }
+
+/* =========================================
+   CARDS
+========================================= */
 
 .category-form-card,
 .category-list-card{
     background:#fff;
-    border-radius:15px;
-    padding:25px;
-    box-shadow:0 7px 20px rgba(0,0,0,.06);
+    border-radius:16px;
+    padding:28px;
+    border:1px solid #e8ede8;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
 }
 
-.category-form-card h2,
-.category-list-header h2{
+/* =========================================
+   FORM CARD
+========================================= */
+
+.category-form-card h2{
     color:#355E3B;
-    font-size:21px;
-    margin-bottom:20px;
+    font-size:22px;
+    margin-bottom:25px;
 }
 
 .category-input{
@@ -25,79 +48,162 @@
 
 .category-input label{
     display:block;
-    font-weight:600;
     margin-bottom:8px;
+    color:#333;
     font-size:14px;
+    font-weight:600;
 }
+
+/* =========================================
+   INPUT
+========================================= */
 
 .input-wrapper{
     position:relative;
 }
 
-.input-wrapper i{
+.input-wrapper > i{
     position:absolute;
-    left:14px;
+    left:15px;
     top:50%;
     transform:translateY(-50%);
     color:#355E3B;
+    font-size:15px;
+    pointer-events:none;
 }
 
-.input-wrapper input{
+.input-wrapper input,
+.input-wrapper select{
     width:100%;
-    height:45px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    padding:0 15px 0 40px;
+    height:48px;
+
+    padding:0 15px 0 43px;
+
+    border:1px solid #d9ddd9;
+    border-radius:9px;
+
+    background:#fafbfa;
+
+    color:#333;
+
     outline:none;
     font-size:14px;
+
+    transition:.25s;
 }
 
-.input-wrapper input:focus{
+.input-wrapper input:focus,
+.input-wrapper select:focus{
     border-color:#355E3B;
+    background:#fff;
+    box-shadow:0 0 0 3px rgba(53,94,59,.08);
 }
+
+.input-wrapper input:hover,
+.input-wrapper select:hover{
+    border-color:#bfc7bf;
+}
+
+/* =========================================
+   SUBMIT BUTTON
+========================================= */
 
 .category-submit{
     width:100%;
-    height:45px;
+    height:48px;
+
     border:none;
-    border-radius:8px;
+    border-radius:9px;
+
     background:#355E3B;
     color:#fff;
+
+    font-size:14px;
     font-weight:600;
+
     cursor:pointer;
+
+    transition:.25s;
 }
 
 .category-submit:hover{
     background:#2c4d31;
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(53,94,59,.18);
 }
+
+.category-submit i{
+    margin-right:7px;
+}
+
+/* =========================================
+   CANCEL EDIT
+========================================= */
 
 .cancel-btn{
     display:flex;
-    justify-content:center;
     align-items:center;
-    height:42px;
+    justify-content:center;
+
+    width:100%;
+    height:44px;
+
     margin-top:10px;
-    border-radius:8px;
-    background:#e9ecef;
-    color:#333;
+
+    border-radius:9px;
+
+    background:#eef0ee;
+    color:#444;
+
     text-decoration:none;
+
     font-size:14px;
     font-weight:600;
+
+    transition:.25s;
 }
+
+.cancel-btn:hover{
+    background:#355E3B;
+    color:#fff;
+}
+
+/* =========================================
+   CATEGORY LIST HEADER
+========================================= */
 
 .category-list-header{
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+.category-list-header h2{
+    color:#355E3B;
+    font-size:22px;
 }
 
 .category-list-header span{
+    padding:6px 12px;
+
     background:#eef5ef;
     color:#355E3B;
-    padding:5px 10px;
-    border-radius:15px;
+
+    border-radius:18px;
+
     font-size:12px;
     font-weight:600;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.category-table{
+    width:100%;
+    overflow:hidden;
 }
 
 .category-table table{
@@ -105,46 +211,127 @@
     border-collapse:collapse;
 }
 
-.category-table th,
-.category-table td{
-    padding:13px 10px;
-    border-bottom:1px solid #edf0ed;
-    text-align:left;
-    font-size:13px;
-}
-
-.category-table th{
-    color:#355E3B;
+.category-table thead{
     background:#f5f7f5;
 }
 
-.product-count{
-    display:inline-flex;
-    min-width:28px;
-    height:28px;
-    padding:0 8px;
+.category-table th{
+    padding:14px 12px;
+
+    text-align:left;
+
+    color:#355E3B;
+
+    font-size:13px;
+    font-weight:600;
+
+    border-bottom:1px solid #e4e9e4;
+}
+
+.category-table td{
+    padding:14px 12px;
+
+    border-bottom:1px solid #edf0ed;
+
+    font-size:13px;
+    color:#555;
+}
+
+.category-table tbody tr{
+    transition:.2s;
+}
+
+.category-table tbody tr:hover{
+    background:#fafcfb;
+}
+
+/* =========================================
+   CATEGORY NAME
+========================================= */
+
+.category-name-display{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.category-name-display strong{
+    color:#333;
+    font-size:14px;
+}
+
+.category-icon-small{
+    width:38px;
+    height:38px;
+
+    display:flex;
     align-items:center;
     justify-content:center;
+
     background:#eef5ef;
     color:#355E3B;
-    border-radius:14px;
+
+    border-radius:9px;
+
+    transition:.25s;
+}
+
+.category-icon-small i{
+    font-size:17px;
+}
+
+.category-table tr:hover .category-icon-small{
+    background:#355E3B;
+    color:#FFD700;
+}
+
+/* =========================================
+   PRODUCT COUNT
+========================================= */
+
+.product-count{
+    min-width:30px;
+    height:30px;
+
+    padding:0 9px;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:#eef5ef;
+    color:#355E3B;
+
+    font-size:12px;
     font-weight:600;
 }
 
+/* =========================================
+   ACTION BUTTONS
+========================================= */
+
 .category-actions{
     display:flex;
+    align-items:center;
     gap:7px;
 }
 
 .edit-category,
 .delete-category{
-    width:31px;
-    height:31px;
+    width:34px;
+    height:34px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:7px;
+
+    border-radius:8px;
+
     text-decoration:none;
+
+    transition:.2s;
 }
 
 .edit-category{
@@ -159,29 +346,53 @@
 
 .edit-category:hover{
     background:#FFD700;
+    color:#5c4c00;
+    transform:translateY(-2px);
 }
 
 .delete-category:hover{
     background:#dc3545;
     color:#fff;
+    transform:translateY(-2px);
 }
+
+/* =========================================
+   SUCCESS / ERROR
+========================================= */
 
 .admin-success,
 .admin-error{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
     padding:13px 16px;
-    border-radius:8px;
+
     margin-bottom:20px;
+
+    border-radius:9px;
+
     font-size:14px;
 }
 
 .admin-success{
-    background:#d4edda;
-    color:#155724;
-    border-left:5px solid #28a745;
+    background:#e8f5e9;
+    color:#2e7d32;
+    border-left:5px solid #43a047;
 }
 
 .admin-error{
-    background:#ffe6e6;
+    background:#fff0f0;
     color:#c62828;
     border-left:5px solid #dc3545;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.no-data{
+    text-align:center !important;
+    padding:40px !important;
+    color:#888 !important;
 }

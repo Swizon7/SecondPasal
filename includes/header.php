@@ -60,13 +60,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         </a>
 
-        <a href="#">
+     <a href="/SecondPasal/categories.php"
+    class="<?php echo basename($_SERVER['PHP_SELF']) == 'categories.php' ? 'active' : ''; ?>">
+    Categories
+</a>
 
-            Categories
-
-        </a>
-
-      <a href="/SecondPasal/contact.php">Contact</a>
+       <a class="<?=($current=="contact.php")?"active":"";?>"
+        href="/SecondPasal/contact.php">Contact</a>
 
     </nav>
 

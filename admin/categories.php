@@ -16,7 +16,7 @@ if (isset($_GET['edit'])) {
 
     $stmt = mysqli_prepare(
         $conn,
-        "SELECT id, category_name
+        "SELECT id, category_name, icon
          FROM categories
          WHERE id = ?
          LIMIT 1"
@@ -210,28 +210,87 @@ $categories = mysqli_query(
 
                     <div class="category-input">
 
-                        <label>Category Name</label>
+    <label>Category Name</label>
 
-                        <div class="input-wrapper">
+    <div class="input-wrapper">
 
-                            <i class="fa-solid fa-tag"></i>
+        <i class="fa-solid fa-tag"></i>
 
-                            <input
-                                type="text"
-                                name="category_name"
-                                placeholder="e.g. Electronics"
-                                maxlength="100"
-                                required
-                                value="<?php
-                                echo $editCategory
-                                    ? htmlspecialchars($editCategory['category_name'])
-                                    : '';
-                                ?>">
+        <input
+            type="text"
+            name="category_name"
+            placeholder="e.g. Electronics"
+            maxlength="100"
+            required
+            value="<?php
+            echo $editCategory
+                ? htmlspecialchars($editCategory['category_name'])
+                : '';
+            ?>">
 
-                        </div>
+    </div>
 
-                    </div>
+</div>
 
+
+<div class="category-input">
+
+    <label>Category Icon</label>
+
+    <div class="input-wrapper">
+
+        <i class="fa-solid fa-icons"></i>
+
+        <select name="icon" required>
+
+            <?php
+
+            $icons = [
+                'fa-mobile-screen' => 'Mobile / Electronics',
+                'fa-laptop' => 'Computers',
+                'fa-shirt' => 'Fashion',
+                'fa-book' => 'Books',
+                'fa-couch' => 'Furniture',
+                'fa-car' => 'Vehicles',
+                'fa-bicycle' => 'Bicycles',
+                'fa-futbol' => 'Sports',
+                'fa-gamepad' => 'Gaming',
+                'fa-camera' => 'Cameras',
+                'fa-headphones' => 'Accessories',
+                'fa-house' => 'Home',
+                'fa-wrench' => 'Tools',
+                'fa-box' => 'Others'
+            ];
+
+            foreach ($icons as $iconClass => $iconName) {
+
+                $selected = '';
+
+                if (
+                    $editCategory &&
+                    isset($editCategory['icon']) &&
+                    $editCategory['icon'] === $iconClass
+                ) {
+                    $selected = 'selected';
+                }
+
+            ?>
+
+                <option
+                    value="<?php echo htmlspecialchars($iconClass); ?>"
+                    <?php echo $selected; ?>>
+
+                    <?php echo htmlspecialchars($iconName); ?>
+
+                </option>
+
+            <?php } ?>
+
+        </select>
+
+    </div>
+
+</div>
                     <button type="submit" class="category-submit">
 
                         <i class="fa-solid <?php echo $editCategory ? 'fa-floppy-disk' : 'fa-plus'; ?>"></i>
