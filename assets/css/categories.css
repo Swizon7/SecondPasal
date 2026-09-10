@@ -1,259 +1,485 @@
 /* =========================================
    SECOND PASAL - CATEGORIES PAGE
+   ENHANCED MARKETPLACE DESIGN
 ========================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background:#f5f7f5;
-    color:#333;
+body {
+    background: #f5f7f5;
+    color: #333;
 }
+
 
 /* =========================================
    PAGE
 ========================================= */
 
-.categories-page{
-    width:90%;
-    max-width:1200px;
-    margin:55px auto 80px;
+.categories-page {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto 90px;
 }
+
 
 /* =========================================
    PAGE HEADER
 ========================================= */
 
-.categories-header{
-    text-align:center;
-    margin-bottom:45px;
+.categories-header {
+    text-align: center;
+    margin-bottom: 50px;
 }
 
-.categories-header h1{
-    color:#355E3B;
-    font-size:38px;
-    font-weight:700;
-    margin-bottom:10px;
+.categories-header h1 {
+    position: relative;
+    display: inline-block;
+
+    color: #355E3B;
+    font-size: 38px;
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    margin-bottom: 12px;
 }
 
-.categories-header p{
-    color:#777;
-    font-size:15px;
+.categories-header h1::after {
+    content: "";
+
+    display: block;
+
+    width: 55px;
+    height: 4px;
+
+    margin: 12px auto 0;
+
+    background: #FFD700;
+
+    border-radius: 10px;
 }
+
+.categories-header p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: #777;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
 
 /* =========================================
    CATEGORY GRID
 ========================================= */
 
-.categories-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:25px;
+.categories-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
 }
+
 
 /* =========================================
    CATEGORY CARD
 ========================================= */
 
-.category-card{
-    position:relative;
+.category-card {
+    position: relative;
 
-    min-height:220px;
+    min-height: 235px;
 
-    background:#fff;
+    padding: 32px 22px;
 
-    border:1px solid #e8ede8;
-    border-radius:18px;
+    background: #ffffff;
 
-    padding:30px 22px;
+    border: 1px solid #e5ebe5;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    border-radius: 20px;
 
-    text-align:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    text-decoration:none;
-    color:#333;
+    text-align: center;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    text-decoration: none;
+    color: #333;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 7px 22px rgba(0, 0, 0, 0.055);
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        border-color .25s ease;
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
 
-.category-card::before{
-    content:"";
 
-    position:absolute;
+/* Soft background decoration */
 
-    top:0;
-    left:0;
+.category-card::after {
+    content: "";
 
-    width:100%;
-    height:4px;
+    position: absolute;
 
-    border-radius:18px 18px 0 0;
+    width: 130px;
+    height: 130px;
 
-    background:#355E3B;
+    right: -55px;
+    bottom: -55px;
 
-    transform:scaleX(0);
+    border-radius: 50%;
 
-    transform-origin:center;
+    background: rgba(53, 94, 59, 0.045);
 
-    transition:.25s;
+    transition: 0.35s ease;
+
+    pointer-events: none;
 }
 
-/* Hover */
 
-.category-card:hover{
-    transform:translateY(-8px);
+/* Top green line */
 
-    border-color:#355E3B;
+.category-card::before {
+    content: "";
 
-    box-shadow:0 14px 35px rgba(0,0,0,.11);
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background: #355E3B;
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    border-radius: 20px 20px 0 0;
+
+    transition: transform 0.3s ease;
 }
 
-.category-card:hover::before{
-    transform:scaleX(1);
-}
 
 /* =========================================
-   ICON
+   CARD HOVER
 ========================================= */
 
-.category-icon{
-    width:82px;
-    height:82px;
+.category-card:hover {
+    transform: translateY(-9px);
 
-    margin-bottom:20px;
+    border-color: #355E3B;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    box-shadow:
+        0 16px 38px rgba(53, 94, 59, 0.14);
+}
 
-    border-radius:50%;
+.category-card:hover::before {
+    transform: scaleX(1);
+}
 
-    background:#eef5ef;
-    color:#355E3B;
+.category-card:hover::after {
+    width: 180px;
+    height: 180px;
+
+    right: -80px;
+    bottom: -80px;
+
+    background: rgba(53, 94, 59, 0.07);
+}
+
+
+/* =========================================
+   CATEGORY ICON
+========================================= */
+
+.category-icon {
+    position: relative;
+    z-index: 2;
+
+    width: 86px;
+    height: 86px;
+
+    margin-bottom: 21px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f1f7f2,
+            #e7f0e8
+        );
+
+    color: #355E3B;
+
+    border: 1px solid #dce8dd;
+
+    box-shadow:
+        0 7px 17px rgba(53, 94, 59, 0.07);
 
     transition:
-        background .25s ease,
-        color .25s ease,
-        transform .25s ease;
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-.category-icon i{
-    font-size:32px;
+.category-icon i {
+    font-size: 32px;
+
+    transition:
+        transform 0.3s ease;
 }
 
-.category-card:hover .category-icon{
-    background:#355E3B;
-    color:#FFD700;
 
-    transform:scale(1.08);
+/* Hover icon */
+
+.category-card:hover .category-icon {
+    background: #355E3B;
+
+    color: #FFD700;
+
+    transform: translateY(-3px) scale(1.08);
+
+    box-shadow:
+        0 10px 22px rgba(53, 94, 59, 0.22);
 }
+
+.category-card:hover .category-icon i {
+    transform: scale(1.08) rotate(-3deg);
+}
+
 
 /* =========================================
    CATEGORY NAME
 ========================================= */
 
-.category-card h2{
-    color:#355E3B;
+.category-card h2 {
+    position: relative;
+    z-index: 2;
 
-    font-size:19px;
-    font-weight:600;
+    color: #355E3B;
 
-    margin-bottom:10px;
+    font-size: 19px;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+
+    margin-bottom: 11px;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
 }
+
+.category-card:hover h2 {
+    color: #2d5133;
+
+    transform: translateY(-2px);
+}
+
 
 /* =========================================
    VIEW PRODUCTS
 ========================================= */
 
-.category-card span{
-    color:#888;
+.category-card span {
+    position: relative;
+    z-index: 2;
 
-    font-size:13px;
-    font-weight:500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    transition:.25s;
+    color: #888;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    transition:
+        color 0.25s ease;
 }
 
-.category-card span i{
-    margin-left:5px;
+.category-card span i {
+    margin-left: 7px;
 
-    color:#355E3B;
+    color: #355E3B;
 
-    transition:.25s;
+    transition:
+        transform 0.25s ease;
 }
 
-.category-card:hover span{
-    color:#355E3B;
+.category-card:hover span {
+    color: #355E3B;
 }
 
-.category-card:hover span i{
-    transform:translateX(4px);
+.category-card:hover span i {
+    transform: translateX(5px);
 }
+
+
+/* =========================================
+   FOCUS
+========================================= */
+
+.category-card:focus {
+    outline: none;
+
+    border-color: #355E3B;
+
+    box-shadow:
+        0 0 0 4px rgba(53, 94, 59, 0.12),
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
 
 /* =========================================
    NO CATEGORIES
 ========================================= */
 
-.no-categories{
-    grid-column:1 / -1;
+.no-categories {
+    grid-column: 1 / -1;
 
-    background:#fff;
+    min-height: 280px;
 
-    min-height:250px;
+    padding: 60px 30px;
 
-    padding:55px 30px;
+    background: #ffffff;
 
-    border:1px solid #e8ede8;
-    border-radius:16px;
+    border: 1px solid #e5ebe5;
 
-    text-align:center;
+    border-radius: 18px;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.no-categories i{
-    font-size:55px;
+.no-categories i {
+    width: 80px;
+    height: 80px;
 
-    color:#355E3B;
+    margin-bottom: 20px;
 
-    margin-bottom:18px;
+    border-radius: 50%;
+
+    background: #eef5ef;
+
+    color: #355E3B;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 36px;
 }
 
-.no-categories h2{
-    color:#355E3B;
+.no-categories h2 {
+    color: #355E3B;
 
-    font-size:23px;
+    font-size: 23px;
 
-    margin-bottom:8px;
+    margin-bottom: 9px;
 }
 
-.no-categories p{
-    color:#777;
+.no-categories p {
+    color: #777;
 
-    font-size:14px;
+    font-size: 14px;
+
+    line-height: 1.6;
 }
+
 
 /* =========================================
-   ACTIVE / FOCUS
+   SUBTLE CARD ENTRY
 ========================================= */
 
-.category-card:focus{
-    outline:none;
+.category-card {
+    animation: categoryFadeIn 0.5s ease both;
+}
 
-    border-color:#355E3B;
+.category-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
 
-    box-shadow:0 0 0 3px rgba(53,94,59,.10);
+.category-card:nth-child(2) {
+    animation-delay: 0.10s;
+}
+
+.category-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.category-card:nth-child(4) {
+    animation-delay: 0.20s;
+}
+
+.category-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.category-card:nth-child(6) {
+    animation-delay: 0.30s;
+}
+
+.category-card:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.category-card:nth-child(8) {
+    animation-delay: 0.40s;
+}
+
+@keyframes categoryFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   SELECTION
+========================================= */
+
+.category-card::selection,
+.category-card h2::selection,
+.category-card span::selection {
+    background: #FFD700;
+    color: #355E3B;
 }

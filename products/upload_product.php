@@ -47,96 +47,176 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Image validation
-    elseif (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-        $error = "Please select a product image.";
-    }
+elseif (
+    !isset($_FILES['images']) ||
+    !is_array($_FILES['images']['name']) ||
+    count($_FILES['images']['name']) === 0
+) {
+    $error = "Please select at least one product photo.";
+} else {
 
-    else {
+    $allowedTypes = [
+        'image/jpeg' => 'jpg',
+        'image/png'  => 'png',
+        'image/webp' => 'webp'
+    ];
 
-        $image = $_FILES['image'];
+    $maxImages = 5;
+    $totalImages = count($_FILES['images']['name']);
 
-        $allowedTypes = [
-            'image/jpeg' => 'jpg',
-            'image/png'  => 'png',
-            'image/webp' => 'webp'
-        ];
+    if ($totalImages > $maxImages) {
+        $error = "You can upload a maximum of 5 photos.";
+    } else {
 
-        $fileType = mime_content_type($image['tmp_name']);
+        $uploadDir = "../uploads/";
 
-        if (!isset($allowedTypes[$fileType])) {
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
 
-            $error = "Only JPG, PNG and WEBP images are allowed.";
+        $uploadedFiles = [];
 
-        } elseif ($image['size'] > 5 * 1024 * 1024) {
+        for ($i = 0; $i < $totalImages; $i++) {
 
-            $error = "Image size must be less than 5 MB.";
-
-        } else {
-
-            $uploadDir = "../uploads/";
-
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
+            if ($_FILES['images']['error'][$i] !== UPLOAD_ERR_OK) {
+                $error = "One of the selected images could not be uploaded.";
+                break;
             }
 
-            // Create a unique filename
+            $tmpName = $_FILES['images']['tmp_name'][$i];
+            $fileSize = $_FILES['images']['size'][$i];
+
+            $fileType = mime_content_type($tmpName);
+
+            if (!isset($allowedTypes[$fileType])) {
+                $error = "Only JPG, PNG and WEBP images are allowed.";
+                break;
+            }
+
+            if ($fileSize > 5 * 1024 * 1024) {
+                $error = "Each image must be less than 5 MB.";
+                break;
+            }
+
             $extension = $allowedTypes[$fileType];
-            $fileName = time() . "_" . bin2hex(random_bytes(5)) . "." . $extension;
+
+            $fileName =
+                time() . "_" .
+                bin2hex(random_bytes(6)) . "." .
+                $extension;
 
             $targetPath = $uploadDir . $fileName;
 
-            if (!move_uploaded_file($image['tmp_name'], $targetPath)) {
+            if (!move_uploaded_file($tmpName, $targetPath)) {
+                $error = "Failed to upload one of the images.";
+                break;
+            }
 
-                $error = "Failed to upload image.";
+            $uploadedFiles[] = $fileName;
+        }
+
+        // Delete already uploaded files if any validation/upload failed
+        if (!empty($error)) {
+
+            foreach ($uploadedFiles as $uploadedFile) {
+                $filePath = $uploadDir . $uploadedFile;
+
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+
+        } else {
+
+            // First image remains compatible with the existing products table
+            $mainImage = $uploadedFiles[0];
+
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO products
+                (
+                    user_id,
+                    category_id,
+                    title,
+                    description,
+                    price,
+                    location,
+                    image,
+                    condition_type,
+                    status,
+                    views
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'available', 0)"
+            );
+
+            mysqli_stmt_bind_param(
+                $stmt,
+                "iissdsss",
+                $userId,
+                $categoryId,
+                $title,
+                $description,
+                $price,
+                $location,
+                $mainImage,
+                $condition
+            );
+
+            if (mysqli_stmt_execute($stmt)) {
+
+                $productId = mysqli_insert_id($conn);
+
+                // Save all images
+                $imageStmt = mysqli_prepare(
+                    $conn,
+                    "INSERT INTO product_images
+                    (product_id, image)
+                    VALUES (?, ?)"
+                );
+
+                foreach ($uploadedFiles as $uploadedFile) {
+
+                    mysqli_stmt_bind_param(
+                        $imageStmt,
+                        "is",
+                        $productId,
+                        $uploadedFile
+                    );
+
+                    mysqli_stmt_execute($imageStmt);
+                }
+
+                mysqli_stmt_close($imageStmt);
+                mysqli_stmt_close($stmt);
+
+                header("Location: my_listings.php?success=uploaded");
+                exit();
 
             } else {
 
-                // Insert product
-                $stmt = mysqli_prepare(
-                    $conn,
-                    "INSERT INTO products
-                    (user_id, category_id, title, description, price, location, image, condition_type, status, views)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'available', 0)"
-                );
+                // Remove uploaded files if product insert fails
+                foreach ($uploadedFiles as $uploadedFile) {
 
-                mysqli_stmt_bind_param(
-                    $stmt,
-                    "iissdsss",
-                    $userId,
-                    $categoryId,
-                    $title,
-                    $description,
-                    $price,
-                    $location,
-                    $fileName,
-                    $condition
-                );
+                    $filePath = $uploadDir . $uploadedFile;
 
-                if (mysqli_stmt_execute($stmt)) {
-
-                    header("Location: my_listings.php?success=uploaded");
-                    exit();
-
-                } else {
-
-                    // Remove uploaded image if database insert fails
-                    if (file_exists($targetPath)) {
-                        unlink($targetPath);
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
                     }
-
-                    $error = "Failed to save product.";
                 }
 
                 mysqli_stmt_close($stmt);
+
+                $error = "Failed to save product.";
             }
         }
     }
+}
 }
 
 include("../includes/header.php");
 
 ?>
-
+<link rel="stylesheet" href="../assets/css/upload_product.css">
 
 <div class="upload-page">
 
@@ -163,10 +243,23 @@ include("../includes/header.php");
             </div>
 
         <?php } ?>
+<form
+    action=""
+    method="POST"
+    enctype="multipart/form-data">
 
-        <form method="POST"
-              enctype="multipart/form-data">
+    <div class="form-section">
 
+    <div class="section-heading">
+        <div class="section-icon">
+            <i class="fa-solid fa-clipboard-list"></i>
+        </div>
+
+        <div>
+            <h2>Listing Details</h2>
+            <p>Tell buyers what you are selling.</p>
+        </div>
+    </div>
             <!-- Product Title -->
 
             <div class="form-group">
@@ -189,7 +282,7 @@ include("../includes/header.php");
                 </div>
 
             </div>
-
+<div class="form-row">
             <!-- Category -->
 
             <div class="form-group">
@@ -259,7 +352,7 @@ include("../includes/header.php");
                 </div>
 
             </div>
-
+</div>
             <!-- Condition -->
 
             <div class="form-group">
@@ -307,6 +400,20 @@ include("../includes/header.php");
                 </div>
 
             </div>
+</div>
+
+<div class="form-section">
+
+    <div class="section-heading">
+        <div class="section-icon">
+            <i class="fa-solid fa-location-dot"></i>
+        </div>
+
+        <div>
+            <h2>Location & Description</h2>
+            <p>Give buyers useful information about your item.</p>
+        </div>
+    </div>
 
             <!-- Location -->
 
@@ -346,37 +453,71 @@ include("../includes/header.php");
                     required><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
 
             </div>
-
+</div>
             <!-- Image -->
 
-            <div class="form-group">
+<div class="form-section">
 
-                <label>
-                    Product Image
-                </label>
+    <div class="section-heading">
+        <div class="section-icon">
+            <i class="fa-solid fa-camera"></i>
+        </div>
 
-                <div class="image-upload">
+        <div>
+            <h2>Product Photos</h2>
+            <p>Good photos help buyers understand your product.</p>
+        </div>
+    </div>
+        
+          <!-- Product Photos -->
+<div class="form-group photo-upload-group">
 
-                    <input
-                        type="file"
-                        name="image"
-                        id="image"
-                        accept=".jpg,.jpeg,.png,.webp"
-                        required>
+    <label class="photo-label">
+        Product Photos
+        <span>Up to 5 photos</span>
+    </label>
 
-                    <p>
-                        JPG, PNG or WEBP — Maximum 5 MB
-                    </p>
+    <div class="photo-upload-box" id="photoUploadBox">
 
-                    <img
-                        id="imagePreview"
-                        src=""
-                        alt="Image Preview"
-                        style="display:none;">
+        <input
+            type="file"
+            name="images[]"
+            id="productImages"
+            accept="image/jpeg,image/png,image/webp"
+            multiple
+            hidden
+            required
+        >
 
-                </div>
+        <label for="productImages" class="photo-upload-content">
 
+            <div class="upload-icon">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
             </div>
+
+            <h3>Upload Product Photos</h3>
+
+            <p>
+                Click here to choose photos from your device or drag them here
+            </p>
+
+            <span>
+                JPG, PNG or WEBP • Maximum 5 MB per photo
+            </span>
+
+        </label>
+
+    </div>
+
+    <div class="photo-counter" id="photoCounter">
+        0 / 5 photos selected
+    </div>
+
+    <div class="photo-preview-grid" id="photoPreviewGrid"></div>
+
+</div>
+
+</div>
 
             <button
                 type="submit"
@@ -386,7 +527,7 @@ include("../includes/header.php");
                 Publish Product
 
             </button>
-
+</div>
         </form>
 
     </div>

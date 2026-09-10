@@ -1,7 +1,6 @@
 <?php
 
-if(session_status() == PHP_SESSION_NONE)
-{
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
@@ -14,188 +13,281 @@ $current = basename($_SERVER['PHP_SELF']);
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="/SecondPasal/assets/css/header.css">
-<link rel="stylesheet" href="/SecondPasal/assets/css/upload_product.css">
+    <link rel="stylesheet" href="/SecondPasal/assets/css/header.css">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<header>
+<header class="site-header">
 
-<div class="header-container">
+    <div class="header-container">
 
-    <!-- Logo -->
+        <!-- =========================
+             LOGO
+        ========================== -->
 
-    <a href="/SecondPasal/homepage/homepage.php" class="logo">
+        <a
+            href="/SecondPasal/homepage/homepage.php"
+            class="logo-link">
 
-        <i class="fa-solid fa-store"></i>
+            <img
+                src="/SecondPasal/assets/images/logo.png"
+                alt="SecondPasal">
 
-        Second<span>Pasal</span>
+            <div class="logo-text">
 
-    </a>
+                <strong>SecondPasal</strong>
 
-    <!-- Navigation -->
-
-    <nav>
-
-        <a class="<?=($current=="homepage.php")?"active":"";?>"
-        href="/SecondPasal/homepage/homepage.php">
-
-            Home
-
-        </a>
-
-        <a class="<?=($current=="products.php")?"active":"";?>"
-        href="/SecondPasal/products/products.php">
-
-            Products
-
-        </a>
-
-     <a href="/SecondPasal/categories.php"
-    class="<?php echo basename($_SERVER['PHP_SELF']) == 'categories.php' ? 'active' : ''; ?>">
-    Categories
-</a>
-
-       <a class="<?=($current=="contact.php")?"active":"";?>"
-        href="/SecondPasal/contact.php">Contact</a>
-
-    </nav>
-
-    <!-- Search -->
-
-   <form action="/SecondPasal/products/products.php" method="GET" class="search-box">
-
-    <input
-        type="text"
-        name="search"
-        placeholder="Search products..."
-        value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-
-    <button type="submit">
-        <i class="fa-solid fa-magnifying-glass"></i>
-    </button>
-
-</form>
-
-    <!-- Right -->
-
-    <div class="right-side">
-
-<?php
-
-if(isset($_SESSION['user_id']))
-{
-
-?>
-
-        <a href="/SecondPasal/products/upload_product.php"
-        class="sell-btn">
-
-            <i class="fa fa-plus"></i>
-
-            Sell Item
-
-        </a>
-
-        <div class="dropdown">
-
-            <button class="dropbtn">
-
-                <i class="fa fa-user-circle"></i>
-
-                <?=htmlspecialchars($_SESSION['name'])?>
-
-                <i class="fa fa-angle-down"></i>
-
-            </button>
-            
-
-            <div class="dropdown-content">
-
-                <a href="/SecondPasal/dashboard/dashboard.php">
-
-                    Dashboard
-
-                </a>
-
-                <a href="/SecondPasal/products/my_listings.php">
-
-                    My Listings
-
-                </a>
-
-                <a href="/SecondPasal/profile/profile.php">
-
-                    Profile
-
-                </a>
-                
-
-                <a href="../products/wishlist.php">
-    <i class="fa-solid fa-heart"></i>
-    <span>Wishlist</span>
-</a>
-
-                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
-
-    <a href="/SecondPasal/admin/dashboard.php" class="admin-dashboard-btn">
-        <i class="fa-solid fa-user-shield"></i>
-        Admin Panel
-    </a>
-
-<?php } ?>
-
-                <a href="/SecondPasal/login/logout.php">
-
-                    Logout
-
-                </a>
+                <span>Buy. Sell. Save.</span>
 
             </div>
 
+        </a>
+
+
+        <!-- =========================
+             NAVIGATION
+        ========================== -->
+
+        <nav class="nav-links">
+
+            <a
+                href="/SecondPasal/homepage/homepage.php"
+                class="<?php echo $current === 'homepage.php' ? 'active' : ''; ?>">
+
+                <i class="fa-solid fa-house"></i>
+                Home
+
+            </a>
+
+
+            <a
+                href="/SecondPasal/products/products.php"
+                class="<?php echo $current === 'products.php' ? 'active' : ''; ?>">
+
+                <i class="fa-solid fa-store"></i>
+                Products
+
+            </a>
+
+
+            <a
+                href="/SecondPasal/categories.php"
+                class="<?php echo $current === 'categories.php' ? 'active' : ''; ?>">
+
+                <i class="fa-solid fa-layer-group"></i>
+                Categories
+
+            </a>
+
+
+            <a
+                href="/SecondPasal/contact.php"
+                class="<?php echo $current === 'contact.php' ? 'active' : ''; ?>">
+
+                <i class="fa-solid fa-envelope"></i>
+                Contact
+
+            </a>
+
+        </nav>
+
+
+        <!-- =========================
+             SEARCH
+        ========================== -->
+
+        <form
+            action="/SecondPasal/products/products.php"
+            method="GET"
+            class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+            <input
+                type="text"
+                name="search"
+                placeholder="Search products..."
+                value="<?php
+                    echo isset($_GET['search'])
+                        ? htmlspecialchars($_GET['search'])
+                        : '';
+                ?>">
+
+            <button type="submit">
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+
+        <!-- =========================
+             RIGHT SIDE
+        ========================== -->
+
+        <div class="right-side">
+
+            <?php if (isset($_SESSION['user_id'])) { ?>
+
+                <!-- Sell -->
+
+                <a
+                    href="/SecondPasal/products/upload_product.php"
+                    class="sell-btn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Sell Item
+
+                </a>
+
+
+                <!-- User Dropdown -->
+
+                <div class="dropdown">
+
+                    <button
+                        type="button"
+                        class="dropbtn">
+
+                        <span class="user-avatar">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </span>
+
+                        <span class="user-name">
+
+                            <?php
+                            echo htmlspecialchars($_SESSION['name']);
+                            ?>
+
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+
+                    </button>
+
+
+                    <div class="dropdown-content">
+
+                        <a href="/SecondPasal/dashboard/dashboard.php">
+
+                            <i class="fa-solid fa-gauge"></i>
+
+                            Dashboard
+
+                        </a>
+
+
+                        <a href="/SecondPasal/products/my_listings.php">
+
+                            <i class="fa-solid fa-box"></i>
+
+                            My Listings
+
+                        </a>
+
+
+                        <a href="/SecondPasal/products/wishlist.php">
+
+                            <i class="fa-solid fa-heart"></i>
+
+                            Wishlist
+
+                        </a>
+
+
+                        <a href="/SecondPasal/profile/profile.php">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Profile
+
+                        </a>
+
+
+                        <?php
+                        if (
+                            isset($_SESSION['role']) &&
+                            $_SESSION['role'] === 'admin'
+                        ) {
+                        ?>
+
+                            <div class="dropdown-divider"></div>
+
+                            <a
+                                href="/SecondPasal/admin/dashboard.php"
+                                class="admin-dashboard-btn">
+
+                                <i class="fa-solid fa-user-shield"></i>
+
+                                Admin Panel
+
+                            </a>
+
+                        <?php } ?>
+
+
+                        <div class="dropdown-divider"></div>
+
+
+                        <a
+                            href="/SecondPasal/login/logout.php"
+                            class="logout-link">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            Logout
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            <?php } else { ?>
+
+
+                <!-- Login -->
+
+                <a
+                    href="/SecondPasal/login/login.php"
+                    class="login-btn">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Login
+
+                </a>
+
+
+                <!-- Register -->
+
+                <a
+                    href="/SecondPasal/login/register.php"
+                    class="register-btn">
+
+                    Register
+
+                </a>
+
+
+            <?php } ?>
+
         </div>
 
-<?php
-
-}
-
-else
-
-{
-
-?>
-
-        <a href="/SecondPasal/login/login.php"
-        class="login-btn">
-
-            Login
-
-        </a>
-
-        <a href="/SecondPasal/login/register.php"
-        class="register-btn">
-
-            Register
-
-        </a>
-
-<?php
-
-}
-
-?>
-
     </div>
-
-</div>
 
 </header>

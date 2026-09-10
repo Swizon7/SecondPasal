@@ -31,7 +31,9 @@ if (isset($_SESSION['user_id'])) {
 
 <div class="login-container">
 
-    <!-- LEFT PANEL -->
+    <!-- =========================
+         LEFT PANEL
+    ========================== -->
 
     <div class="left-panel">
 
@@ -78,7 +80,9 @@ if (isset($_SESSION['user_id'])) {
     </div>
 
 
-    <!-- RIGHT PANEL -->
+    <!-- =========================
+         RIGHT PANEL
+    ========================== -->
 
     <div class="right-panel">
 
@@ -93,7 +97,38 @@ if (isset($_SESSION['user_id'])) {
 
         <?php
 
-        /* Registration success */
+        /*
+         * Registration / Verification Email Sent
+         *
+         * register_process.php redirects:
+         * register.php?success=verification_sent
+         */
+
+        if (
+            isset($_GET['success']) &&
+            $_GET['success'] === 'verification_sent'
+        ) {
+        ?>
+
+            <div class="success">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Registration successful!
+                Please check your Gmail and verify your email
+                before logging in.
+
+            </div>
+
+        <?php
+        }
+
+
+        /*
+         * Registration success
+         * Kept for compatibility with older registration flow.
+         */
+
         if (
             isset($_GET['registered']) &&
             $_GET['registered'] === 'success'
@@ -101,15 +136,22 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
             <div class="success">
-                🎉 Registration successful!
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Registration successful!
                 Please verify your Gmail before logging in.
+
             </div>
 
         <?php
         }
 
 
-        /* Password reset success */
+        /*
+         * Password reset success
+         */
+
         if (
             isset($_GET['reset']) &&
             $_GET['reset'] === 'success'
@@ -117,15 +159,22 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
             <div class="success">
+
                 <i class="fa-solid fa-circle-check"></i>
-                Password changed successfully. Please login.
+
+                Password changed successfully.
+                Please login.
+
             </div>
 
         <?php
         }
 
 
-        /* Email verification success */
+        /*
+         * Email verification success
+         */
+
         if (
             isset($_GET['verified']) &&
             $_GET['verified'] === 'success'
@@ -133,15 +182,22 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
             <div class="success">
+
                 <i class="fa-solid fa-circle-check"></i>
-                Email verified successfully. You can now log in.
+
+                Email verified successfully.
+                You can now log in.
+
             </div>
 
         <?php
         }
 
 
-        /* Error messages */
+        /*
+         * Error messages
+         */
+
         if (isset($_GET['error'])) {
 
             $error = $_GET['error'];
@@ -150,8 +206,12 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
                 <div class="error">
+
                     <i class="fa-solid fa-envelope-circle-check"></i>
-                    Please verify your Gmail address before logging in.
+
+                    Please verify your Gmail address
+                    before logging in.
+
                 </div>
 
         <?php
@@ -160,8 +220,11 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
                 <div class="error">
+
                     <i class="fa-solid fa-circle-exclamation"></i>
+
                     Invalid email or password.
+
                 </div>
 
         <?php
@@ -170,8 +233,11 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
                 <div class="error">
+
                     <i class="fa-solid fa-user-slash"></i>
+
                     Your account has been deactivated.
+
                 </div>
 
         <?php
@@ -180,8 +246,11 @@ if (isset($_SESSION['user_id'])) {
         ?>
 
                 <div class="error">
+
                     <i class="fa-solid fa-circle-exclamation"></i>
+
                     <?php echo htmlspecialchars($error); ?>
+
                 </div>
 
         <?php
@@ -197,9 +266,13 @@ if (isset($_SESSION['user_id'])) {
 
         <form action="login_process.php" method="POST">
 
+            <!-- EMAIL -->
+
             <div class="input-box">
 
-                <label>Email</label>
+                <label for="email">
+                    Email
+                </label>
 
                 <div class="input-field">
 
@@ -207,8 +280,10 @@ if (isset($_SESSION['user_id'])) {
 
                     <input
                         type="email"
+                        id="email"
                         name="email"
                         placeholder="Enter your email"
+                        autocomplete="email"
                         required>
 
                 </div>
@@ -216,9 +291,13 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
 
+            <!-- PASSWORD -->
+
             <div class="input-box">
 
-                <label>Password</label>
+                <label for="password">
+                    Password
+                </label>
 
                 <div class="input-field">
 
@@ -229,17 +308,21 @@ if (isset($_SESSION['user_id'])) {
                         id="password"
                         name="password"
                         placeholder="Enter your password"
+                        autocomplete="current-password"
                         required>
 
                     <i
                         class="fa-solid fa-eye toggle-password"
-                        id="togglePassword">
+                        id="togglePassword"
+                        title="Show password">
                     </i>
 
                 </div>
 
             </div>
 
+
+            <!-- OPTIONS -->
 
             <div class="options">
 
@@ -260,9 +343,13 @@ if (isset($_SESSION['user_id'])) {
             </div>
 
 
+            <!-- LOGIN BUTTON -->
+
             <button
                 type="submit"
                 class="login-btn">
+
+                <i class="fa-solid fa-right-to-bracket"></i>
 
                 Login
 
@@ -270,6 +357,8 @@ if (isset($_SESSION['user_id'])) {
 
         </form>
 
+
+        <!-- REGISTER -->
 
         <div class="register">
 
@@ -285,6 +374,8 @@ if (isset($_SESSION['user_id'])) {
 
 </div>
 
+
+<!-- LOGIN JAVASCRIPT -->
 
 <script src="../assets/js/login.js"></script>
 

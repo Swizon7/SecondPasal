@@ -10,6 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     exit();
 }
 
+
+// ==========================
+// GET FORM DATA
+// ==========================
+
 $name = trim($_POST['name']);
 $email = trim($_POST['email']);
 $phone = trim($_POST['phone']);
@@ -34,20 +39,50 @@ if (
 
 
 // ==========================
+// PHONE VALIDATION
+// ==========================
+
+// Phone must contain exactly 10 digits
+
+if (!preg_match('/^[0-9]{10}$/', $phone)) {
+
+    header(
+        "Location: register.php?error=Phone number must contain exactly 10 digits."
+    );
+
+    exit();
+}
+
+
+// ==========================
 // EMAIL VALIDATION
 // ==========================
 
 // Check valid email format
+
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-    header("Location: register.php?error=Invalid email address.");
+    header(
+        "Location: register.php?error=Invalid email address."
+    );
+
     exit();
 }
 
-// Allow Gmail only
-if (!preg_match('/^[A-Za-z0-9._%+-]+@gmail\.com$/i', $email)) {
 
-    header("Location: register.php?error=Please use a valid Gmail address.");
+// ==========================
+// GMAIL ONLY
+// ==========================
+
+if (!preg_match(
+    '/^[A-Za-z0-9._%+-]+@gmail\.com$/i',
+    $email
+)) {
+
+    header(
+        "Location: register.php?error=Please use a valid Gmail address."
+    );
+
     exit();
 }
 
@@ -58,7 +93,10 @@ if (!preg_match('/^[A-Za-z0-9._%+-]+@gmail\.com$/i', $email)) {
 
 if ($password !== $confirm) {
 
-    header("Location: register.php?error=Passwords do not match.");
+    header(
+        "Location: register.php?error=Passwords do not match."
+    );
+
     exit();
 }
 
@@ -67,9 +105,14 @@ if ($password !== $confirm) {
 // PASSWORD VALIDATION
 // ==========================
 
+// Password must be at least 8 characters
+
 if (strlen($password) < 8) {
 
-    header("Location: register.php?error=Password must be at least 8 characters.");
+    header(
+        "Location: register.php?error=Password must be at least 8 characters."
+    );
+
     exit();
 }
 
@@ -96,11 +139,17 @@ mysqli_stmt_execute($check);
 
 $result = mysqli_stmt_get_result($check);
 
+
 if (mysqli_num_rows($result) > 0) {
 
-    header("Location: register.php?error=Email already registered.");
+    header(
+        "Location: register.php?error=Email already registered."
+    );
+
     exit();
 }
+
+mysqli_stmt_close($check);
 
 
 // ==========================
@@ -129,7 +178,12 @@ $verificationToken = bin2hex(
 );
 
 
+// ==========================
+// HASH VERIFICATION TOKEN
+// ==========================
+
 // Store only the hash in database
+
 $verificationHash = hash(
     "sha256",
     $verificationToken
@@ -160,6 +214,7 @@ $stmt = mysqli_prepare(
     )"
 );
 
+
 mysqli_stmt_bind_param(
     $stmt,
     "ssssss",
@@ -172,11 +227,25 @@ mysqli_stmt_bind_param(
 );
 
 
+// ==========================
+// EXECUTE INSERT
+// ==========================
+
 if (!mysqli_stmt_execute($stmt)) {
 
-    header("Location: register.php?error=Registration failed.");
+    header(
+        "Location: register.php?error=Registration failed."
+    );
+
     exit();
 }
+
+
+// ==========================
+// GET USER ID
+// ==========================
+
+$userId = mysqli_insert_id($conn);
 
 
 // ==========================
@@ -200,13 +269,17 @@ if (
     )
 ) {
 
-    header("Location: register.php?success=verification_sent");
+    header(
+        "Location: register.php?success=verification_sent"
+    );
+
     exit();
 
 } else {
 
-    // Remove account if email could not be sent
-    $userId = mysqli_insert_id($conn);
+    // ==========================
+    // DELETE ACCOUNT IF EMAIL FAILS
+    // ==========================
 
     $delete = mysqli_prepare(
         $conn,
@@ -222,8 +295,17 @@ if (
 
     mysqli_stmt_execute($delete);
 
-    header("Location: register.php?error=verification_email_failed");
+    mysqli_stmt_close($delete);
+
+
+    header(
+        "Location: register.php?error=verification_email_failed"
+    );
+
     exit();
 }
+
+
+mysqli_stmt_close($stmt);
 
 ?>

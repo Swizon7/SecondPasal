@@ -1,42 +1,195 @@
-const imageInput = document.getElementById("image");
-const imagePreview = document.getElementById("imagePreview");
+document.addEventListener("DOMContentLoaded", function () {
 
-imageInput.addEventListener("change", function () {
+    const input = document.getElementById("productImages");
+    const uploadBox = document.getElementById("photoUploadBox");
+    const uploadContent = document.querySelector(".photo-upload-content");
+    const previewGrid = document.getElementById("photoPreviewGrid");
+    const counter = document.getElementById("photoCounter");
 
-    const file = this.files[0];
+    const maxPhotos = 5;
+    const maxSize = 5 * 1024 * 1024;
 
-    if (!file) {
-        imagePreview.style.display = "none";
-        imagePreview.src = "";
-        return;
+    let selectedFiles = [];
+
+    function updateInputFiles() {
+        const dataTransfer = new DataTransfer();
+
+        selectedFiles.forEach(file => {
+            dataTransfer.items.add(file);
+        });
+
+        input.files = dataTransfer.files;
     }
 
-    const allowedTypes = [
-        "image/jpeg",
-        "image/png",
-        "image/webp"
-    ];
+    function addFiles(files) {
 
-    if (!allowedTypes.includes(file.type)) {
-        alert("Please select a JPG, PNG or WEBP image.");
+        Array.from(files).forEach(file => {
+
+            if (selectedFiles.length >= maxPhotos) {
+                return;
+            }
+
+            if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+                alert(file.name + " is not a JPG, PNG or WEBP image.");
+                return;
+            }
+
+            if (file.size > maxSize) {
+                alert(file.name + " is larger than 5 MB.");
+                return;
+            }
+
+            const duplicate = selectedFiles.some(existing =>
+                existing.name === file.name &&
+                existing.size === file.size &&
+                existing.lastModified === file.lastModified
+            );
+
+            if (!duplicate) {
+                selectedFiles.push(file);
+            }
+        });
+
+        updateInputFiles();
+        renderPreviews();
+    }
+
+    function renderPreviews() {
+
+        previewGrid.innerHTML = "";
+
+        selectedFiles.forEach((file, index) => {
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+
+                const preview = document.createElement("div");
+                preview.className = "photo-preview";
+
+                preview.innerHTML = `
+                    <img
+                        src="${event.target.result}"
+                        alt="Product photo ${index + 1}"
+                    >
+
+                    ${
+                        index === 0
+                        ? `<span class="main-photo-badge">
+                              <i class="fa-solid fa-star"></i>
+                              Main Photo
+                           </span>`
+                        : ""
+                    }
+
+                    <button
+                        type="button"
+                        class="remove-photo"
+                        data-index="${index}"
+                        title="Remove photo"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+
+                previewGrid.appendChild(preview);
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        counter.textContent =
+            `${selectedFiles.length} / ${maxPhotos} photos selected`;
+
+        if (selectedFiles.length >= maxPhotos) {
+            uploadBox.classList.add("disabled");
+        } else {
+            uploadBox.classList.remove("disabled");
+        }
+    }
+
+
+    /* ==============================
+       FILE SELECT
+    ============================== */
+
+    input.addEventListener("change", function () {
+
+        if (this.files.length > 0) {
+            addFiles(this.files);
+        }
+
+        // Reset input so same file can be selected again
         this.value = "";
-        imagePreview.style.display = "none";
-        return;
-    }
+    });
 
-    if (file.size > 5 * 1024 * 1024) {
-        alert("Image size must be less than 5 MB.");
-        this.value = "";
-        imagePreview.style.display = "none";
-        return;
-    }
 
-    const reader = new FileReader();
+    /* ==============================
+       REMOVE PHOTO
+    ============================== */
 
-    reader.onload = function (event) {
-        imagePreview.src = event.target.result;
-        imagePreview.style.display = "block";
-    };
+    previewGrid.addEventListener("click", function (event) {
 
-    reader.readAsDataURL(file);
+        const removeButton = event.target.closest(".remove-photo");
+
+        if (!removeButton) {
+            return;
+        }
+
+        const index = parseInt(removeButton.dataset.index);
+
+        selectedFiles.splice(index, 1);
+
+        updateInputFiles();
+        renderPreviews();
+    });
+
+
+    /* ==============================
+       DRAG & DROP
+    ============================== */
+
+    ["dragenter", "dragover"].forEach(eventName => {
+
+        uploadBox.addEventListener(eventName, function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (selectedFiles.length < maxPhotos) {
+                uploadBox.classList.add("dragging");
+            }
+        });
+
+    });
+
+    ["dragleave", "drop"].forEach(eventName => {
+
+        uploadBox.addEventListener(eventName, function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            uploadBox.classList.remove("dragging");
+        });
+
+    });
+
+
+    uploadBox.addEventListener("drop", function (event) {
+
+        if (selectedFiles.length >= maxPhotos) {
+            return;
+        }
+
+        addFiles(event.dataTransfer.files);
+    });
+
+
+    /* ==============================
+       INITIAL STATE
+    ============================== */
+
+    counter.textContent = "0 / 5 photos selected";
+
 });

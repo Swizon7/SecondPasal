@@ -1,0 +1,1327 @@
+/* =========================================================
+   SECOND PASAL
+   EDIT PRODUCT PAGE
+   COMPLETE STANDALONE CSS
+========================================================= */
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.upload-page {
+    width: 100%;
+    min-height: calc(100vh - 78px);
+    padding: 45px 20px 70px;
+    background: #f5f7f5;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MAIN EDIT CARD
+========================================================= */
+
+.edit-card {
+    width: 850px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 42px 50px 36px;
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e9e4;
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 35px rgba(38, 56, 43, 0.08);
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.edit-card .upload-title {
+    text-align: center;
+
+    margin: 0;
+    padding: 0 0 27px;
+
+    border-bottom: 1px solid #e7ebe8;
+}
+
+
+/* =========================================================
+   PAGE LABEL
+========================================================= */
+
+.edit-page-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-bottom: 11px;
+    padding: 6px 12px;
+
+    background: #eef5ef;
+    color: #355e3b;
+
+    border-radius: 20px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+
+.edit-page-label i {
+    color: #d2a900;
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.edit-card .upload-title h1 {
+    margin: 0 0 8px;
+
+    color: #2f4434;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 31px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+.edit-card .upload-title h1 i {
+    margin-right: 8px;
+    color: #355e3b;
+}
+
+
+.edit-card .upload-title p {
+    margin: 0;
+
+    color: #818982;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+.edit-card .error-message {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 22px;
+    padding: 13px 15px;
+
+    background: #fff3f3;
+
+    border: 1px solid #efcccc;
+    border-left: 5px solid #d32f2f;
+    border-radius: 9px;
+
+    color: #c62828;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+.edit-card .error-message i {
+    flex-shrink: 0;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.edit-card .success-message {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-top: 22px;
+    padding: 13px 15px;
+
+    background: #f0f8f2;
+
+    border: 1px solid #cfe3d2;
+    border-left: 5px solid #43a047;
+    border-radius: 9px;
+
+    color: #2e7d32;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+.edit-card .success-message i {
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.edit-card form {
+    width: 100%;
+    margin: 0;
+}
+
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
+.edit-card .form-section {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 30px 0 31px;
+
+    border-bottom: 1px solid #e7ebe8;
+}
+
+
+.edit-card .form-section:last-of-type {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.edit-card .section-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   SECTION ICON
+========================================================= */
+
+.edit-card .section-icon {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #edf5ef;
+
+    border-radius: 12px;
+
+    color: #355e3b;
+}
+
+
+.edit-card .section-icon i {
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.edit-card .section-heading h2 {
+    margin: 0 0 3px;
+
+    color: #303a32;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+.edit-card .section-heading p {
+    margin: 0;
+
+    color: #8a928c;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.edit-card .form-group {
+    width: 100%;
+    margin-bottom: 21px;
+}
+
+
+.edit-card .form-group:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.edit-card .form-group > label,
+.edit-card .replace-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #343b36;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TWO COLUMN FORM ROW
+========================================================= */
+
+.edit-card .form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   INPUT FIELD
+========================================================= */
+
+.edit-card .input-field {
+    position: relative;
+    width: 100%;
+}
+
+
+/* =========================================================
+   INPUT ICON
+========================================================= */
+
+.edit-card .input-field > i {
+    position: absolute;
+
+    top: 50%;
+    left: 17px;
+
+    z-index: 2;
+
+    transform: translateY(-50%);
+
+    color: #355e3b;
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.edit-card .input-field input,
+.edit-card .input-field select {
+    display: block;
+
+    width: 100%;
+    height: 54px;
+
+    box-sizing: border-box;
+
+    padding: 0 17px 0 45px;
+
+    background: #fafbfa;
+
+    border: 1px solid #dfe5e0;
+    border-radius: 11px;
+
+    outline: none;
+
+    color: #333333;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.edit-card .input-field input::placeholder {
+    color: #a2a7a3;
+}
+
+
+.edit-card .input-field input:hover,
+.edit-card .input-field select:hover {
+    border-color: #c4cec6;
+}
+
+
+.edit-card .input-field input:focus,
+.edit-card .input-field select:focus {
+    border-color: #355e3b;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 4px rgba(53, 94, 59, 0.07);
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.edit-card .input-field select {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   NUMBER INPUT
+========================================================= */
+
+.edit-card input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+
+.edit-card input[type="number"]::-webkit-inner-spin-button,
+.edit-card input[type="number"]::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+}
+
+
+/* =========================================================
+   CONDITION OPTIONS
+========================================================= */
+
+.edit-card .condition-options {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+
+.edit-card .condition-option {
+    display: block;
+
+    margin: 0;
+
+    cursor: pointer;
+}
+
+
+.edit-card .condition-option input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.edit-card .condition-option span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 43px;
+
+    box-sizing: border-box;
+
+    padding: 10px 7px;
+
+    background: #fafbfa;
+
+    border: 1px solid #dfe5e0;
+    border-radius: 9px;
+
+    color: #636b65;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    text-align: center;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.edit-card .condition-option span:hover {
+    background: #f2f7f3;
+
+    border-color: #89a08e;
+
+    color: #355e3b;
+}
+
+
+.edit-card .condition-option input:checked + span {
+    background: #355e3b;
+
+    border-color: #355e3b;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 6px 14px rgba(53, 94, 59, 0.16);
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.edit-card textarea {
+    display: block;
+
+    width: 100%;
+    min-height: 155px;
+
+    box-sizing: border-box;
+
+    padding: 15px 17px;
+
+    background: #fafbfa;
+
+    border: 1px solid #dfe5e0;
+    border-radius: 11px;
+
+    outline: none;
+
+    resize: vertical;
+
+    color: #333333;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    line-height: 1.65;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.edit-card textarea::placeholder {
+    color: #a2a7a3;
+}
+
+
+.edit-card textarea:hover {
+    border-color: #c4cec6;
+}
+
+
+.edit-card textarea:focus {
+    background: #ffffff;
+
+    border-color: #355e3b;
+
+    box-shadow:
+        0 0 0 4px rgba(53, 94, 59, 0.07);
+}
+
+
+/* =========================================================
+   PHOTO MANAGEMENT AREA
+========================================================= */
+
+.edit-photo-area {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 19px;
+
+    background: #fbfcfb;
+
+    border: 1px solid #dfe6e1;
+    border-radius: 14px;
+}
+
+
+/* =========================================================
+   PHOTO MANAGEMENT HEADER
+========================================================= */
+
+.photo-management-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 17px;
+}
+
+
+.photo-management-header > div {
+    min-width: 0;
+}
+
+
+.photo-management-header strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #343a35;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.photo-management-header > div > span {
+    display: block;
+
+    color: #8b928c;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   PHOTO COUNT
+========================================================= */
+
+.photo-count {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 78px;
+
+    box-sizing: border-box;
+
+    padding: 7px 11px;
+
+    background: #edf6ef;
+
+    border: 1px solid #d5e4d7;
+    border-radius: 20px;
+
+    color: #355e3b !important;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   EXISTING PHOTO GRID
+========================================================= */
+
+.edit-photo-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   PHOTO CARD
+========================================================= */
+
+.edit-photo-card {
+    position: relative;
+
+    width: 100%;
+    height: 145px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    background: #edf0ed;
+
+    border: 1px solid #dce3dd;
+    border-radius: 11px;
+}
+
+
+.edit-photo-card img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.35s ease;
+}
+
+
+.edit-photo-card:hover img {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   PHOTO DARK OVERLAY
+========================================================= */
+
+.edit-photo-card::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.01) 35%,
+            rgba(0, 0, 0, 0.13) 100%
+        );
+}
+
+
+/* =========================================================
+   MAIN PHOTO BADGE
+========================================================= */
+
+.edit-photo-card .main-photo-badge {
+    position: absolute;
+
+    left: 8px;
+    bottom: 8px;
+
+    z-index: 3;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 5px 8px;
+
+    background: rgba(53, 94, 59, 0.96);
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+
+.edit-photo-card .main-photo-badge i {
+    color: #ffd700;
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   REMOVE PHOTO BUTTON
+========================================================= */
+
+.remove-existing-photo {
+    position: absolute;
+
+    top: 7px;
+    right: 7px;
+
+    z-index: 5;
+
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 0.72);
+
+    border: none;
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.remove-existing-photo:hover {
+    background: #c62828;
+
+    transform: scale(1.08);
+}
+
+
+.remove-existing-photo i {
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ADD PHOTOS AREA
+========================================================= */
+
+.add-photos-area {
+    width: 100%;
+
+    margin-top: 21px;
+}
+
+
+/* =========================================================
+   UPLOAD BOX
+========================================================= */
+
+.edit-upload-box {
+    position: relative;
+
+    width: 100%;
+    min-height: 155px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    background: #fafcfb;
+
+    border: 2px dashed #cbd6cd;
+    border-radius: 14px;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.edit-upload-box:hover {
+    background: #f5f9f6;
+
+    border-color: #355e3b;
+}
+
+
+/* =========================================================
+   FILE INPUT
+========================================================= */
+
+.edit-upload-box input[type="file"] {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 10;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   UPLOAD CONTENT
+========================================================= */
+
+.edit-upload-content {
+    position: relative;
+
+    z-index: 2;
+
+    min-height: 155px;
+
+    box-sizing: border-box;
+
+    padding: 25px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   UPLOAD ICON
+========================================================= */
+
+.edit-upload-content .upload-icon {
+    width: 53px;
+    height: 53px;
+
+    margin-bottom: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf3ec;
+
+    border-radius: 50%;
+
+    color: #355e3b;
+
+    font-size: 21px;
+
+    transition: transform 0.25s ease;
+}
+
+
+.edit-upload-box:hover .upload-icon {
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   UPLOAD TEXT
+========================================================= */
+
+.edit-upload-content strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #414741;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.edit-upload-content span {
+    display: block;
+
+    color: #999f9a;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   PHOTO COUNTER
+========================================================= */
+
+.edit-photo-counter {
+    min-height: 18px;
+
+    margin-top: 10px;
+
+    color: #355e3b;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+
+    line-height: 18px;
+}
+
+
+/* =========================================================
+   NEW PHOTO PREVIEW
+========================================================= */
+
+.edit-new-preview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    width: 100%;
+
+    margin-top: 12px;
+}
+
+
+/* =========================================================
+   NEW PHOTO
+========================================================= */
+
+.edit-new-photo {
+    position: relative;
+
+    width: 100%;
+    height: 100px;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    background: #edf0ed;
+
+    border: 1px solid #dce3dd;
+    border-radius: 9px;
+}
+
+
+.edit-new-photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   NEW PHOTO NUMBER
+========================================================= */
+
+.new-photo-number {
+    position: absolute;
+
+    top: 7px;
+    left: 7px;
+
+    z-index: 3;
+
+    width: 23px;
+    height: 23px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(53, 94, 59, 0.95);
+
+    border-radius: 50%;
+
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PHOTO LIMIT MESSAGE
+========================================================= */
+
+.photo-limit-message {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-top: 20px;
+    padding: 13px 14px;
+
+    background: #f0f8f1;
+
+    border: 1px solid #d6e8d8;
+    border-radius: 9px;
+
+    color: #2e7d32;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+.photo-limit-message i {
+    color: #43a047;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ACTION AREA
+========================================================= */
+
+.edit-actions {
+    display: grid;
+
+    grid-template-columns: 145px 1fr;
+
+    gap: 12px;
+
+    width: 100%;
+
+    margin-top: 29px;
+}
+
+
+/* =========================================================
+   CANCEL BUTTON
+========================================================= */
+
+.edit-card .cancel-btn {
+    width: 100%;
+    height: 57px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #f7f8f7;
+
+    border: 1px solid #dfe5e0;
+    border-radius: 11px;
+
+    color: #687069;
+
+    text-decoration: none;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.edit-card .cancel-btn:hover {
+    background: #eef2ef;
+
+    border-color: #c8d3ca;
+
+    color: #355e3b;
+}
+
+
+.edit-card .cancel-btn i {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.edit-card .edit-actions .upload-btn {
+    width: 100%;
+    height: 57px;
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #355e3b;
+
+    border: none;
+    border-radius: 11px;
+
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.edit-card .edit-actions .upload-btn:hover {
+    background: #2c4d31;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(53, 94, 59, 0.18);
+}
+
+
+.edit-card .edit-actions .upload-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   BOTTOM NOTE
+========================================================= */
+
+.edit-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    width: 100%;
+
+    margin-top: 13px;
+
+    color: #929992;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+
+    text-align: center;
+}
+
+
+.edit-note i {
+    color: #355e3b;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PREVENT BOX SIZE ISSUES
+========================================================= */
+
+.edit-card *,
+.edit-card *::before,
+.edit-card *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   FONT FALLBACK
+========================================================= */
+
+.edit-card input,
+.edit-card select,
+.edit-card textarea,
+.edit-card button {
+    font-family: 'Poppins', sans-serif;
+}

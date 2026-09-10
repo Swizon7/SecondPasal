@@ -1,277 +1,863 @@
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* =====================================================
+   SECOND PASAL - REGISTER PAGE
+   ===================================================== */
 
-/* ==========================
-   RESET
-========================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:linear-gradient(135deg,#355E3B,#4f7d54);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px;
+body {
+    font-family: "Poppins", Arial, sans-serif;
+    background: #f3f6f3;
+    min-height: 100vh;
+    color: #222;
 }
 
-/* ==========================
-   CONTAINER
-========================== */
 
-.register-container{
-    width:1100px;
-    max-width:100%;
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    display:flex;
-    align-items:stretch;
-    box-shadow:0 20px 60px rgba(0,0,0,.20);
+/* =====================================================
+   MAIN CONTAINER
+   ===================================================== */
+
+.register-container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    background: #ffffff;
 }
 
-/* ==========================
+
+/* =====================================================
    LEFT PANEL
-========================== */
+   ===================================================== */
 
-.left-panel{
-    width:45%;
-    background:linear-gradient(180deg,#355E3B,#2d4f33);
-    color:white;
-    padding:60px 50px;
+.left-panel {
+    width: 43%;
+    min-height: 100vh;
 
+    background: linear-gradient(
+        145deg,
+        #244a2d,
+        #355E3B 55%,
+        #426d48
+    );
 
-    justify-content:center;
+    color: white;
+
+    padding: 55px 65px;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    overflow: hidden;
 }
 
-.logo{
-    width:110px;
-    margin-bottom:20px;
+
+/* Decorative circles */
+
+.left-panel::before {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border: 70px solid rgba(255, 215, 0, 0.08);
+
+    border-radius: 50%;
+
+    right: -170px;
+    top: -120px;
 }
 
-.left-panel h1{
-    font-size:42px;
-    font-weight:700;
+.left-panel::after {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    left: -150px;
+    bottom: -110px;
 }
 
-.tagline{
-    color:#FFD700;
-    font-size:20px;
-    margin:10px 0 25px;
-    font-weight:600;
+
+/* =====================================================
+   BRAND
+   ===================================================== */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    position: relative;
+
+    z-index: 2;
 }
 
-.description{
-    font-size:16px;
-    line-height:1.8;
-    margin-bottom:40px;
-    color:#f3f3f3;
+.logo {
+    width: 65px;
+    height: 65px;
+
+    object-fit: contain;
+
+    background: white;
+
+    padding: 7px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.features{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+.brand h1 {
+    font-size: 30px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
 }
 
-.features p{
-    display:flex;
-    align-items:center;
-    font-size:16px;
+.brand h1 span {
+    color: #FFD700;
 }
 
-.features i{
-    color:#FFD700;
-    margin-right:15px;
-    font-size:18px;
+.tagline {
+    margin-top: 2px;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    color: rgba(255, 255, 255, 0.75);
+
+    letter-spacing: 1px;
 }
 
-/* ==========================
+
+/* =====================================================
+   WELCOME CONTENT
+   ===================================================== */
+
+.welcome-content {
+    margin-top: 85px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.welcome-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 215, 0, 0.12);
+
+    border: 1px solid rgba(255, 215, 0, 0.3);
+
+    color: #FFD700;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.welcome-content h2 {
+    margin-top: 24px;
+
+    font-size: 42px;
+
+    line-height: 1.2;
+
+    font-weight: 800;
+
+    max-width: 480px;
+}
+
+.welcome-content h2 span {
+    color: #FFD700;
+}
+
+.description {
+    margin-top: 22px;
+
+    max-width: 500px;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* =====================================================
+   FEATURES
+   ===================================================== */
+
+.features {
+    margin-top: 48px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.feature-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 15px;
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    transition: 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    transform: translateY(-3px);
+}
+
+.feature-icon {
+    min-width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: rgba(255, 215, 0, 0.14);
+
+    color: #FFD700;
+
+    font-size: 16px;
+}
+
+.feature-item strong {
+    display: block;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.feature-item span {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 10px;
+
+    color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* =====================================================
+   LEFT FOOTER
+   ===================================================== */
+
+.left-footer {
+    margin-top: auto;
+
+    padding-top: 35px;
+
+    position: relative;
+
+    z-index: 2;
+
+    font-size: 12px;
+
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.left-footer i {
+    color: #FFD700;
+
+    margin-right: 5px;
+}
+
+
+/* =====================================================
    RIGHT PANEL
-========================== */
-.right-panel{
-    width:55%;
-    background:#fff;
-    padding:45px 60px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start;
+   ===================================================== */
+
+.right-panel {
+    width: 57%;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 45px 90px;
+
+    background: #ffffff;
 }
 
-.right-panel h2{
-    color:#355E3B;
-    font-size:34px;
-    margin-bottom:10px;
+
+/* =====================================================
+   FORM HEADER
+   ===================================================== */
+
+.form-header {
+    margin-bottom: 28px;
 }
 
-.right-panel>p{
-    color:#777;
-    margin-bottom:30px;
-}
-/* ==========================
-   TWO COLUMN FORM
-========================== */
+.form-header h2 {
+    font-size: 31px;
 
-.form-row{
-    display:flex;
-    gap:20px;
+    color: #243b29;
+
+    font-weight: 800;
 }
 
-.form-row .input-box{
-    flex:1;
-}
-/* ==========================
-   FORM
-========================== */
+.form-header p {
+    margin-top: 6px;
 
-.input-box{
-    margin-bottom:18px;
+    color: #777;
+
+    font-size: 13px;
 }
 
-.input-box label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:600;
-    color:#333;
+.mobile-logo {
+    display: none;
 }
 
-.input-field{
-    position:relative;
+
+/* =====================================================
+   MESSAGES
+   ===================================================== */
+
+.message {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    margin-bottom: 22px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
 }
 
-.input-field input{
-    width:100%;
-    height:55px;
-    border:1px solid #ddd;
-    border-radius:10px;
-    padding:0 50px;
-    font-size:15px;
-    background:#fafafa;
-    outline:none;
-    transition:.3s;
+.message > i {
+    font-size: 17px;
+
+    margin-top: 2px;
 }
 
-.input-field input:focus{
-    border-color:#355E3B;
-    background:#fff;
-    box-shadow:0 0 10px rgba(53,94,59,.15);
+.message strong {
+    display: block;
+
+    margin-bottom: 2px;
 }
 
-.input-field .fa-user,
-.input-field .fa-envelope,
-.input-field .fa-phone,
-.input-field .fa-lock{
-    position:absolute;
-    left:18px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#777;
+.message span {
+    display: block;
+
+    line-height: 1.5;
 }
+
+.message.error {
+    color: #a32020;
+
+    background: #fff1f1;
+
+    border: 1px solid #ffd1d1;
+}
+
+.message.success {
+    color: #276738;
+
+    background: #f0faf2;
+
+    border: 1px solid #cde8d2;
+}
+
+
+/* =====================================================
+   FORM ROW
+   ===================================================== */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* =====================================================
+   INPUT BOX
+   ===================================================== */
+
+.input-box {
+    margin-bottom: 18px;
+}
+
+.input-box label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #354238;
+}
+
+
+/* =====================================================
+   INPUT FIELD
+   ===================================================== */
+
+.input-field {
+    height: 49px;
+
+    display: flex;
+
+    align-items: center;
+
+    border: 1px solid #dfe4df;
+
+    border-radius: 9px;
+
+    background: #fafbfa;
+
+    transition: 0.25s ease;
+}
+
+.input-field > i:first-child {
+    width: 45px;
+
+    text-align: center;
+
+    color: #7b887e;
+
+    font-size: 14px;
+}
+
+.input-field input {
+    flex: 1;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    color: #222;
+
+    padding-right: 12px;
+}
+
+.input-field input::placeholder {
+    color: #a8afa9;
+}
+
+.input-field:focus-within {
+    border-color: #355E3B;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(53, 94, 59, 0.09);
+}
+
+.input-field:focus-within > i:first-child {
+    color: #355E3B;
+}
+
+
+/* =====================================================
+   INPUT HINT
+   ===================================================== */
+
+.input-hint {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    color: #999;
+}
+
+
+/* =====================================================
+   PASSWORD TOGGLE
+   ===================================================== */
 
 .toggle-password,
-.toggle-confirm{
-    position:absolute;
-    right:18px;
-    top:50%;
-    transform:translateY(-50%);
-    cursor:pointer;
-    color:#777;
-    transition:.3s;
+.toggle-confirm {
+    width: 43px;
+
+    text-align: center;
+
+    color: #929a94 !important;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
 }
 
 .toggle-password:hover,
-.toggle-confirm:hover{
-    color:#355E3B;
+.toggle-confirm:hover {
+    color: #355E3B !important;
 }
 
-/* ==========================
-   BUTTON
-========================== */
 
-.register-btn{
-    width:100%;
-    height:55px;
-    border:none;
-    border-radius:10px;
-    background:#355E3B;
-    color:white;
-    font-size:17px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
-    margin-top:15px;
+/* =====================================================
+   PASSWORD STRENGTH
+   ===================================================== */
+
+.password-strength {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 7px;
 }
 
-.register-btn:hover{
-    background:#2b4b31;
-    transform:translateY(-2px);
-    box-shadow:0 10px 20px rgba(53,94,59,.25);
+.strength-bar {
+    flex: 1;
+
+    height: 4px;
+
+    border-radius: 10px;
+
+    background: #e5e8e5;
+
+    overflow: hidden;
 }
 
-/* ==========================
+.strength-bar span {
+    display: block;
+
+    width: 0;
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    transition: 0.3s ease;
+}
+
+#strengthText {
+    min-width: 90px;
+
+    font-size: 10px;
+
+    color: #999;
+}
+
+
+/* =====================================================
+   PASSWORD MATCH
+   ===================================================== */
+
+.password-match {
+    display: block;
+
+    margin-top: 6px;
+
+    font-size: 10px;
+
+    min-height: 14px;
+}
+
+
+/* =====================================================
+   TERMS
+   ===================================================== */
+
+.terms {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin-top: 1px;
+
+    margin-bottom: 21px;
+
+    padding: 11px 13px;
+
+    background: #f7f9f7;
+
+    border-radius: 8px;
+
+    color: #777;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+.terms i {
+    color: #355E3B;
+
+    font-size: 12px;
+
+    margin-top: 2px;
+}
+
+
+/* =====================================================
+   REGISTER BUTTON
+   ===================================================== */
+
+.register-btn {
+    width: 100%;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #355E3B,
+        #426d48
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    box-shadow:
+        0 7px 18px rgba(53, 94, 59, 0.18);
+
+    transition: 0.3s ease;
+}
+
+.register-btn span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.register-btn > i {
+    color: #FFD700;
+
+    transition: 0.3s ease;
+}
+
+.register-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #2d5233,
+        #355E3B
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 23px rgba(53, 94, 59, 0.25);
+}
+
+.register-btn:hover > i {
+    transform: translateX(4px);
+}
+
+.register-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =====================================================
    LOGIN LINK
-========================== */
+   ===================================================== */
 
-.login-link{
-    margin-top:25px;
-    text-align:center;
-    color:#666;
+.login-link {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 23px;
+
+    font-size: 12px;
+
+    color: #777;
 }
 
-.login-link a{
-    color:#355E3B;
-    text-decoration:none;
-    font-weight:700;
+.login-link a {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #355E3B;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
 }
 
-.login-link a:hover{
-    color:#FFD700;
+.login-link a:hover {
+    color: #243f29;
 }
 
-/* ==========================
-   ALERTS
-========================== */
+.login-link a i {
+    font-size: 9px;
 
-.error{
-    background:#ffe6e6;
-    color:#dc3545;
-    border-left:5px solid #dc3545;
-    padding:14px;
-    border-radius:10px;
-    margin-bottom:20px;
-    text-align:center;
+    transition: 0.2s ease;
 }
 
-.success{
-    background:#d4edda;
-    color:#155724;
-    border-left:5px solid #28a745;
-    padding:14px;
-    border-radius:10px;
-    margin-bottom:20px;
-    text-align:center;
+.login-link a:hover i {
+    transform: translateX(3px);
 }
 
-/* ==========================
+
+/* =====================================================
+   SECURITY NOTE
+   ===================================================== */
+
+.secure-note {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 17px;
+
+    color: #a0a6a1;
+
+    font-size: 10px;
+}
+
+.secure-note i {
+    color: #355E3B;
+}
+
+
+/* =====================================================
    ANIMATION
-========================== */
+   ===================================================== */
 
-@keyframes fadeIn{
+.left-panel {
+    animation: slideLeft 0.6s ease;
+}
 
-    from{
-        opacity:0;
-        transform:translateY(20px);
+.right-panel {
+    animation: slideRight 0.6s ease;
+}
+
+@keyframes slideLeft {
+
+    from {
+        opacity: 0;
+
+        transform: translateX(-20px);
     }
 
-    to{
-        opacity:1;
-        transform:translateY(0);
+    to {
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+
+}
+
+@keyframes slideRight {
+
+    from {
+        opacity: 0;
+
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateX(0);
     }
 
 }

@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$userId = $_SESSION['user_id'];
+$userId = (int) $_SESSION['user_id'];
 
 $stmt = mysqli_prepare(
     $conn,
@@ -35,35 +35,58 @@ mysqli_stmt_execute($stmt);
 
 $result = mysqli_stmt_get_result($stmt);
 
+$listings = [];
+
+while ($row = mysqli_fetch_assoc($result)) {
+    $listings[] = $row;
+}
+
+$totalListings = count($listings);
+$availableCount = 0;
+$soldCount = 0;
+$totalViews = 0;
+
+foreach ($listings as $listing) {
+    $status = strtolower($listing['status']);
+
+    if ($status === 'available') {
+        $availableCount++;
+    }
+
+    if ($status === 'sold') {
+        $soldCount++;
+    }
+
+    $totalViews += (int) $listing['views'];
+}
+
 include("../includes/header.php");
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <title>My Listings | SecondPasal</title>
-
-    <link rel="stylesheet" href="../assets/css/my_listings.css">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-</head>
-
-<body>
+<link rel="stylesheet" href="../assets/css/my_listings.css">
 
 <div class="listings-page">
 
+    <!-- =========================================
+         PAGE HEADER
+    ========================================== -->
+
     <div class="listings-header">
 
-        <div>
+        <div class="listings-heading">
+
+            <span class="page-label">
+                <i class="fa-solid fa-store"></i>
+                SELLER CENTER
+            </span>
+
             <h1>My Listings</h1>
-            <p>Manage the products you have posted on SecondPasal.</p>
+
+            <p>
+                Manage and track the products you have posted on SecondPasal.
+            </p>
+
         </div>
 
         <a href="upload_product.php" class="sell-btn">
@@ -73,114 +96,274 @@ include("../includes/header.php");
 
     </div>
 
-    <?php if (isset($_GET['success']) && $_GET['success'] === 'uploaded') { ?>
+
+    <!-- =========================================
+         SUCCESS MESSAGES
+    ========================================== -->
+
+    <?php if (
+        isset($_GET['success']) &&
+        $_GET['success'] === 'uploaded'
+    ) { ?>
 
         <div class="success-message">
             <i class="fa-solid fa-circle-check"></i>
-            Product uploaded successfully!
-        </div>
-
-    <?php } ?>
-    <?php if (isset($_GET['success']) && $_GET['success'] === 'updated') { ?>
-
-    <div class="success-message">
-        <i class="fa-solid fa-circle-check"></i>
-        Product updated successfully!
-    </div>
-
-<?php } ?>
-
-    <?php if (isset($_GET['deleted']) && $_GET['deleted'] === 'success') { ?>
-
-        <div class="success-message">
-            <i class="fa-solid fa-circle-check"></i>
-            Product deleted successfully!
+            <span>Product uploaded successfully!</span>
         </div>
 
     <?php } ?>
 
-    <?php if (mysqli_num_rows($result) > 0) { ?>
+
+    <?php if (
+        isset($_GET['success']) &&
+        $_GET['success'] === 'updated'
+    ) { ?>
+
+        <div class="success-message">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Product updated successfully!</span>
+        </div>
+
+    <?php } ?>
+
+
+    <?php if (
+        isset($_GET['deleted']) &&
+        $_GET['deleted'] === 'success'
+    ) { ?>
+
+        <div class="success-message">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Product deleted successfully!</span>
+        </div>
+
+    <?php } ?>
+
+
+    <!-- =========================================
+         STATISTICS
+    ========================================== -->
+
+    <?php if ($totalListings > 0) { ?>
+
+        <div class="listing-stats">
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-box"></i>
+                </div>
+
+                <div>
+                    <span>Total Listings</span>
+                    <strong><?php echo $totalListings; ?></strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon available-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div>
+                    <span>Available</span>
+                    <strong><?php echo $availableCount; ?></strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon sold-icon">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                </div>
+
+                <div>
+                    <span>Sold</span>
+                    <strong><?php echo $soldCount; ?></strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon views-icon">
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+
+                <div>
+                    <span>Total Views</span>
+                    <strong><?php echo $totalViews; ?></strong>
+                </div>
+            </div>
+
+        </div>
+
+    <?php } ?>
+
+
+    <!-- =========================================
+         LISTINGS
+    ========================================== -->
+
+    <?php if ($totalListings > 0) { ?>
 
         <div class="listing-grid">
 
-            <?php while ($product = mysqli_fetch_assoc($result)) { ?>
+            <?php foreach ($listings as $product) { ?>
 
-                <div class="listing-card">
+                <?php
+
+                $image = 'no-image.png';
+
+                if (!empty($product['image'])) {
+
+                    $imagePath = "../uploads/" . $product['image'];
+
+                    if (file_exists($imagePath)) {
+                        $image = $product['image'];
+                    }
+                }
+
+                $status = strtolower(trim($product['status']));
+
+                ?>
+
+                <article class="listing-card">
+
+                    <!-- IMAGE -->
 
                     <div class="image-container">
 
-                        <?php
-                        $image = !empty($product['image'])
-                            ? $product['image']
-                            : 'no-image.png';
-                        ?>
+                        <a
+                            href="product_details.php?id=<?php echo (int) $product['id']; ?>"
+                            class="listing-image-link"
+                        >
 
-                        <img
-                            src="../uploads/<?php echo htmlspecialchars($image); ?>"
-                            alt="<?php echo htmlspecialchars($product['title']); ?>">
+                            <img
+                                src="../uploads/<?php echo htmlspecialchars($image); ?>"
+                                alt="<?php echo htmlspecialchars($product['title']); ?>"
+                            >
 
-                        <span class="status-badge <?php echo strtolower($product['status']); ?>">
-                            <?php echo htmlspecialchars(ucfirst($product['status'])); ?>
+                        </a>
+
+
+                        <span class="status-badge <?php echo htmlspecialchars($status); ?>">
+
+                            <i class="fa-solid
+                                <?php
+                                echo $status === 'available'
+                                    ? 'fa-circle-check'
+                                    : 'fa-circle-xmark';
+                                ?>">
+                            </i>
+
+                            <?php echo htmlspecialchars(ucfirst($status)); ?>
+
                         </span>
 
                     </div>
 
+
+                    <!-- CONTENT -->
+
                     <div class="listing-content">
+
+                        <div class="category-label">
+                            <i class="fa-solid fa-tag"></i>
+
+                            <?php echo htmlspecialchars($product['category_name']); ?>
+                        </div>
+
 
                         <h2>
                             <?php echo htmlspecialchars($product['title']); ?>
                         </h2>
 
+
                         <div class="price">
                             Rs. <?php echo number_format($product['price'], 2); ?>
                         </div>
 
-                        <p>
-                            <i class="fa-solid fa-location-dot"></i>
-                            <?php echo htmlspecialchars($product['location']); ?>
-                        </p>
 
-                        <p>
-                            <i class="fa-solid fa-tag"></i>
-                            <?php echo htmlspecialchars($product['category_name']); ?>
-                        </p>
+                        <!-- PRODUCT INFO -->
 
-                        <p>
-                            <i class="fa-solid fa-star"></i>
-                            <?php echo htmlspecialchars($product['condition_type']); ?>
-                        </p>
+                        <div class="listing-info">
 
-                        <p>
-                            <i class="fa-solid fa-eye"></i>
-                            <?php echo (int)$product['views']; ?> views
-                        </p>
+                            <div>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>
+                                    <?php echo htmlspecialchars($product['location']); ?>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fa-solid fa-star"></i>
+                                <span>
+                                    <?php echo htmlspecialchars($product['condition_type']); ?>
+                                </span>
+                            </div>
+
+                            <div>
+                                <i class="fa-solid fa-eye"></i>
+                                <span>
+                                    <?php echo (int) $product['views']; ?> views
+                                </span>
+                            </div>
+
+                        </div>
+
+
+                        <!-- DATE -->
+
+                        <div class="listing-date">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            Listed
+                            <?php
+                            echo date(
+                                "M d, Y",
+                                strtotime($product['created_at'])
+                            );
+                            ?>
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
 
                         <div class="listing-actions">
 
                             <a
-                                href="product_details.php?id=<?php echo $product['id']; ?>"
-                                class="view-btn">
+                                href="product_details.php?id=<?php echo (int) $product['id']; ?>"
+                                class="view-btn"
+                            >
+                                <i class="fa-solid fa-eye"></i>
                                 View
                             </a>
 
+
                             <a
-                                href="edit_product.php?id=<?php echo $product['id']; ?>"
-                                class="edit-btn">
+                                href="edit_product.php?id=<?php echo (int) $product['id']; ?>"
+                                class="edit-btn"
+                            >
+                                <i class="fa-solid fa-pen"></i>
                                 Edit
                             </a>
 
+
                             <a
-                                href="delete_product.php?id=<?php echo $product['id']; ?>"
+                                href="delete_product.php?id=<?php echo (int) $product['id']; ?>"
                                 class="delete-btn"
-                                onclick="return confirm('Are you sure you want to delete this product?');">
-                                Delete
+                                onclick="return confirm('Are you sure you want to delete this product?');"
+                            >
+                                <i class="fa-solid fa-trash"></i>
                             </a>
 
                         </div>
 
                     </div>
 
-                </div>
+                </article>
 
             <?php } ?>
 
@@ -188,19 +371,29 @@ include("../includes/header.php");
 
     <?php } else { ?>
 
+        <!-- =========================================
+             EMPTY STATE
+        ========================================== -->
+
         <div class="empty-state">
 
-            <i class="fa-solid fa-box-open"></i>
+            <div class="empty-icon">
+                <i class="fa-solid fa-box-open"></i>
+            </div>
 
             <h2>No Listings Yet</h2>
 
             <p>
                 You haven't posted any products yet.
+                Start selling your unused items on SecondPasal.
             </p>
 
             <a href="upload_product.php" class="sell-btn">
+
                 <i class="fa-solid fa-plus"></i>
+
                 Sell Your First Item
+
             </a>
 
         </div>
@@ -209,6 +402,4 @@ include("../includes/header.php");
 
 </div>
 
-</body>
-
-</html>
+<?php include("../includes/footer.php"); ?>
