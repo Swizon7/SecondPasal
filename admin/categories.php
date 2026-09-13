@@ -55,7 +55,7 @@ $categories = mysqli_query(
     <meta charset="UTF-8">
 
     <title>Manage Categories | SecondPasal</title>
-
+    <link rel="stylesheet" href="../assets/css/admin_sidebar.css">
     <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
     <link rel="stylesheet" href="../assets/css/admin_categories.css">
 

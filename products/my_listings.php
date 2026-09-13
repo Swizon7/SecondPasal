@@ -349,8 +349,29 @@ include("../includes/header.php");
                                 <i class="fa-solid fa-pen"></i>
                                 Edit
                             </a>
+<?php if ($status === 'available') { ?>
 
+    <a
+        href="mark_sold.php?id=<?php echo (int)$product['id']; ?>"
+        class="btn-sold"
+        onclick="return confirm('Are you sure you want to mark this product as sold?');"
+    >
+        <i class="fa-solid fa-check"></i>
+        Mark as Sold
+    </a>
 
+<?php } else { ?>
+
+    <a
+        href="mark_available.php?id=<?php echo (int)$product['id']; ?>"
+        class="btn-available"
+        onclick="return confirm('Do you want to make this product available again?');"
+    >
+        <i class="fa-solid fa-rotate-left"></i>
+        Available
+    </a>
+
+<?php } ?>
                             <a
                                 href="delete_product.php?id=<?php echo (int) $product['id']; ?>"
                                 class="delete-btn"

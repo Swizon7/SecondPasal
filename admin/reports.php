@@ -68,7 +68,7 @@ $result = mysqli_stmt_get_result($stmt);
 <meta charset="UTF-8">
 
 <title>Reports | SecondPasal</title>
-
+<link rel="stylesheet" href="../assets/css/admin_sidebar.css">
 <link rel="stylesheet" href="../assets/css/admin_dashboard.css">
 <link rel="stylesheet" href="../assets/css/admin_reports.css">
 

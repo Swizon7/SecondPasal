@@ -352,31 +352,47 @@ body {
 .listing-date i {
     color: #355E3B;
 }
-
-
 /* =========================================
    ACTIONS
 ========================================= */
 
 .listing-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr 43px;
+    grid-template-columns: 1fr 1fr 1fr 42px;
     gap: 8px;
     margin-top: 16px;
 }
 
-.listing-actions a {
+
+/* ALL ACTION BUTTONS */
+
+.listing-actions a,
+.listing-actions span {
     height: 40px;
-    border-radius: 8px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 6px;
+
+    border-radius: 8px;
+
     text-decoration: none;
+
+    font-family: 'Poppins', sans-serif;
     font-size: 12px;
     font-weight: 600;
-    transition: .2s ease;
+
+    border: none;
+
+    transition: all .2s ease;
 }
+
+
+/* =========================================
+   VIEW
+========================================= */
 
 .view-btn {
     background: #edf5ef;
@@ -388,6 +404,11 @@ body {
     color: #fff;
 }
 
+
+/* =========================================
+   EDIT
+========================================= */
+
 .edit-btn {
     background: #fff8df;
     color: #8a6d00;
@@ -397,6 +418,42 @@ body {
     background: #FFD700;
     color: #333;
 }
+
+
+/* =========================================
+   MARK AS SOLD
+========================================= */
+
+.btn-sold {
+    background: #355E3B;
+    color: #fff;
+
+    cursor: pointer;
+}
+
+.btn-sold:hover {
+    background: #2d5032;
+    color: #fff;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   SOLD LABEL
+========================================= */
+
+.sold-label {
+    background: #ffe4e6;
+    color: #dc3545;
+
+    cursor: default;
+}
+
+
+/* =========================================
+   DELETE
+========================================= */
 
 .delete-btn {
     background: #ffeded;
@@ -410,41 +467,54 @@ body {
 
 
 /* =========================================
-   EMPTY STATE
+   ICON ALIGNMENT
 ========================================= */
 
-.empty-state {
-    margin-top: 30px;
-    padding: 75px 30px;
-    text-align: center;
-    background: #fff;
-    border: 1px solid #e5eae6;
-    border-radius: 16px;
-    box-shadow: 0 7px 22px rgba(0, 0, 0, .04);
+.listing-actions i {
+    font-size: 12px;
 }
 
-.empty-icon {
-    width: 75px;
-    height: 75px;
-    margin: 0 auto 18px;
-    border-radius: 50%;
-    background: #eaf3ec;
-    color: #355E3B;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
+
+/* =========================================
+   SOLD CARD
+========================================= */
+
+.listing-card:has(.sold-label) {
+    border-color: #eadfe1;
 }
 
-.empty-state h2 {
-    margin-bottom: 8px;
-    color: #333;
+.listing-card:has(.sold-label) .image-container::after {
+    content: "SOLD";
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(198, 40, 40, .90);
+
+    color: #fff;
+
+    padding: 8px 18px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    pointer-events: none;
 }
 
-.empty-state p {
-    max-width: 460px;
-    margin: 0 auto 22px;
-    color: #888;
-    font-size: 14px;
-    line-height: 1.6;
-}   
+.btn-available {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.btn-available:hover {
+    background: #2e7d32;
+    color: #fff;
+}

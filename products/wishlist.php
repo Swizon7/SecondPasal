@@ -49,15 +49,27 @@ include("../includes/header.php");
 
 <div class="wishlist-page">
 
+    <!-- =========================
+         HEADER
+    ========================== -->
+
     <div class="wishlist-header">
 
-        <h1>My Wishlist</h1>
+        <h1>
+            <i class="fa-solid fa-heart"></i>
+            My Wishlist
+        </h1>
 
         <p>
             Products you've saved for later.
         </p>
 
     </div>
+
+
+    <!-- =========================
+         WISHLIST PRODUCTS
+    ========================== -->
 
     <?php if (mysqli_num_rows($result) > 0) { ?>
 
@@ -66,6 +78,8 @@ include("../includes/header.php");
             <?php while ($product = mysqli_fetch_assoc($result)) { ?>
 
                 <div class="wishlist-card">
+
+                    <!-- PRODUCT IMAGE -->
 
                     <div class="wishlist-image">
 
@@ -86,44 +100,134 @@ include("../includes/header.php");
                     </div>
 
 
+                    <!-- PRODUCT CONTENT -->
+
                     <div class="wishlist-content">
 
                         <h2>
                             <?php echo htmlspecialchars($product['title']); ?>
                         </h2>
 
+
+                        <!-- PRICE -->
+
                         <div class="wishlist-price">
-                            Rs. <?php echo number_format($product['price'], 2); ?>
+
+                            Rs.
+                            <?php echo number_format($product['price'], 2); ?>
+
                         </div>
 
-                        <p>
-                            <strong>Condition:</strong>
-                            <?php echo htmlspecialchars($product['condition_type']); ?>
-                        </p>
+
+                        <!-- CONDITION -->
 
                         <p>
+
+                            <strong>
+                                Condition:
+                            </strong>
+
+                            <?php
+                            echo htmlspecialchars(
+                                $product['condition_type']
+                            );
+                            ?>
+
+                        </p>
+
+
+                        <!-- LOCATION -->
+
+                        <p>
+
                             <i class="fa-solid fa-location-dot"></i>
-                            <?php echo htmlspecialchars($product['location']); ?>
+
+                            <?php
+                            echo htmlspecialchars(
+                                $product['location']
+                            );
+                            ?>
+
                         </p>
 
+
+                        <!-- SELLER -->
+
                         <p>
-                            <strong>Seller:</strong>
-                            <?php echo htmlspecialchars($product['seller_name']); ?>
+
+                            <strong>
+                                Seller:
+                            </strong>
+
+                            <?php
+                            echo htmlspecialchars(
+                                $product['seller_name']
+                            );
+                            ?>
+
                         </p>
+
+
+                        <!-- STATUS -->
+
+                        <?php if (
+                            isset($product['status']) &&
+                            strtolower($product['status']) !== 'available'
+                        ) { ?>
+
+                            <p class="wishlist-status">
+
+                                <strong>
+                                    Status:
+                                </strong>
+
+                                <?php
+                                echo htmlspecialchars(
+                                    ucfirst($product['status'])
+                                );
+                                ?>
+
+                            </p>
+
+                        <?php } ?>
+
+
+                        <!-- ACTIONS -->
 
                         <div class="wishlist-actions">
 
+                            <?php if (
+                                !isset($product['status']) ||
+                                strtolower($product['status']) === 'available'
+                            ) { ?>
+
+                                <a
+                                    href="product_details.php?id=<?php echo (int) $product['id']; ?>"
+                                    class="view-wishlist">
+
+                                    <i class="fa-solid fa-eye"></i>
+
+                                    View Product
+
+                                </a>
+
+                            <?php } else { ?>
+
+                                <span class="view-wishlist disabled">
+
+                                    <i class="fa-solid fa-ban"></i>
+
+                                    Not Available
+
+                                </span>
+
+                            <?php } ?>
+
+
                             <a
-                                href="product_details.php?id=<?php echo (int)$product['id']; ?>"
-                                class="view-wishlist">
-
-                                View Product
-
-                            </a>
-
-                            <a
-                                href="wishlist_action.php?action=remove&product_id=<?php echo (int)$product['id']; ?>"
+                                href="wishlist_action.php?action=remove&product_id=<?php echo (int) $product['id']; ?>"
                                 class="remove-wishlist"
+                                title="Remove from wishlist"
                                 onclick="return confirm('Remove this product from your wishlist?');">
 
                                 <i class="fa-solid fa-heart-crack"></i>
@@ -140,20 +244,31 @@ include("../includes/header.php");
 
         </div>
 
+
+    <!-- =========================
+         EMPTY WISHLIST
+    ========================== -->
+
     <?php } else { ?>
 
         <div class="empty-wishlist">
 
             <i class="fa-regular fa-heart"></i>
 
-            <h2>Your Wishlist is Empty</h2>
+            <h2>
+                Your Wishlist is Empty
+            </h2>
 
             <p>
                 Save products you like and come back to them later.
             </p>
 
             <a href="products.php">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
                 Browse Products
+
             </a>
 
         </div>
@@ -162,4 +277,11 @@ include("../includes/header.php");
 
 </div>
 
-<?php include("../includes/footer.php"); ?>
+
+<?php
+
+mysqli_stmt_close($stmt);
+
+include("../includes/footer.php");
+
+?>
